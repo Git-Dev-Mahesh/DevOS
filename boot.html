@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Booting DevOS...</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/boot.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+    <div class="boot-screen">
+
+        <div class="boot-logo">
+
+            <h1>DEV<span>OS</span></h1>
+
+            <small>Developer Operating System</small>
+
+        </div>
+
+        <div class="boot-console">
+
+            <div id="bootOutput"></div>
+
+        </div>
+
+        <div class="progress-wrapper">
+
+            <div class="progress-bar">
+
+                <div id="progressFill"></div>
+
+            </div>
+
+            <span id="progressText">0%</span>
+
+        </div>
+
+    </div>
+
+    <script src="js/systemInfo.js"></script>
+    <script src="js/boot.js"></script>
+
+</body>
+
+</html>

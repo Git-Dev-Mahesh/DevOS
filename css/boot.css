@@ -1,0 +1,130 @@
+/* ==========================
+        RESET
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ==========================
+        BODY
+========================== */
+
+body{
+    background:#050816;
+    color:white;
+    font-family:"JetBrains Mono", monospace;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+/* ==========================
+      BOOT SCREEN
+========================== */
+
+.boot-screen{
+    width:900px;
+    max-width:95%;
+}
+
+/* ==========================
+        LOGO
+========================== */
+
+.boot-logo{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.boot-logo h1{
+    font-size:70px;
+    letter-spacing:6px;
+}
+
+.boot-logo span{
+    color:#3B82F6;
+}
+
+.boot-logo small{
+    color:#94A3B8;
+}
+
+/* ==========================
+      TERMINAL WINDOW
+========================== */
+
+html, body{
+    height: 100vh;
+    overflow: hidden;           /* the page itself never scrolls/grows */
+}
+
+/* ==========================
+      TERMINAL WINDOW
+========================== */
+
+.boot-console{
+    height: 320px;          /* fixed, not min-height */
+    overflow-y: auto;       /* required for scrolling to do anything */
+    scroll-behavior: smooth;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.boot-console::-webkit-scrollbar{
+    display: none;
+}
+
+/* ==========================
+        BOOT LINE
+========================== */
+
+.boot-line{
+    color:#D1D5DB;
+}
+
+.ok{
+    color:#22C55E;
+}
+
+.failed{
+    color:#EF4444;
+}
+
+.success{
+    color:#3B82F6;
+}
+
+
+/* ==========================
+      PROGRESS BAR
+========================== */
+
+.progress-wrapper{
+    margin-top:35px;
+}
+
+.progress-bar{
+    height:10px;
+    background:#1E293B;
+    border-radius:999px;
+    overflow:hidden;
+}
+
+#progressFill{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#3B82F6,#8B5CF6);
+    transition:.3s;
+}
+
+#progressText{
+    display:block;
+    text-align:right;
+    margin-top:12px;
+    color:#94A3B8;
+}

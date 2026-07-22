@@ -1,0 +1,121 @@
+/* ==========================
+        TERMINAL
+========================== */
+
+#terminal{
+    margin-top:20px;
+}
+
+.terminal-card{
+    padding:0;
+    overflow:hidden;
+}
+
+.terminal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 20px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.terminal-buttons{
+    display:flex;
+    gap:8px;
+}
+
+.terminal-buttons span{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+}
+
+.red{
+    background:#ff5f56;
+}
+
+.yellow{
+    background:#ffbd2e;
+}
+
+.green{
+    background:#27c93f;
+}
+
+/* ==========================
+        TERMINAL BODY
+========================== */
+
+.terminal-body{
+    background:#090B10;
+    min-height:420px;
+    padding:25px;
+    font-family:"JetBrains Mono", monospace;
+}
+
+/* ==========================
+        TERMINAL PROMPT
+========================== */
+
+.prompt{
+    color:#22C55E;
+    margin-right:10px;
+    font-weight:600;
+}
+
+/* ==========================
+        TERMINAL INPUT
+========================== */
+
+.terminal-input{
+
+    display:flex;
+    align-items:center;
+
+}
+
+.terminal-input input{
+    flex:1;
+    background:none;
+    border:none;
+    outline:none;
+    color:white;
+    font-size:1rem;
+    font-family:inherit;
+}
+
+/* ==========================
+        TERMINAL OUTPUT
+========================== */
+
+#terminal-output{
+    margin-bottom:20px;
+}
+
+#terminal-output p{
+    margin-bottom:10px;
+    color:#D1D5DB;
+}
+
+.terminal-command{
+    color:#3B82F6;
+}
+
+/* ==========================
+    TERMINAL ERROR MESSAGE
+========================== */
+
+.terminal-error{
+    color:#EF4444;
+    margin-top:8px;
+}
+
+.terminal-tip{
+    color:#94A3B8;
+    margin-bottom:16px;
+}
+
+.terminal-command{
+    color:#22C55E;
+    font-family:"JetBrains Mono", monospace;
+}
