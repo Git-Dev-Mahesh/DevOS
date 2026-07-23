@@ -56,31 +56,52 @@ const bootSequence = [
 
 async function initializeKernel(){
 
-    await bootStep("DevOS Boot Manager v1.0.0");
-    
+    bootHeader("HARDWARE SCAN");
+
     await bootStep(
-        `CPU Threads : ${systemInfo.cpu}`,
+        formatLine("Browser", systemInfo.browser),
         "INFO"
     );
 
-    if (systemInfo.memory !== "Unavailable") {
+    await bootStep(
+        formatLine("Platform", systemInfo.platform),
+        "INFO"
+    );
 
-        await bootStep(
-            `MEMORY CLASS : ${systemInfo.memory} GB`,
-            "INFO"
-        );
+    await bootStep(
+        formatLine("Language", systemInfo.language),
+        "INFO"
+    );
 
-    } else {
+    await bootStep(
+        formatLine("Resolution", `${systemInfo.screenWidth} x ${systemInfo.screenHeight}`),
+        "INFO"
+    );
 
-        await bootStep(
-            "MEMORY CLASS : Hardware API Not Supported",
-            "WARN"
-        );
+    await bootStep(
+        formatLine("Timezone", systemInfo.timezone),
+        "INFO"
+    );
 
-    }
+    await bootStep(
+        formatLine("CPU Threads", systemInfo.cpu),
+        "INFO"
+    );
+
+    await bootStep(
+        formatLine(
+            "RAM",
+            systemInfo.memory !== "Unavailable" ? `${systemInfo.memory} GB` : "Unavailable"
+        ),
+        "INFO"
+    );
+
+    await bootStep(
+        formatLine("Network", systemInfo.online ? "ONLINE" : "OFFLINE"),
+        systemInfo.online ? "OK" : "WARN"
+    );
 
     const kernelVersion = "DevOS Kernel v1.0.0";
-
     await bootStep(kernelVersion, "INFO");
 
 }
@@ -88,16 +109,6 @@ async function initializeKernel(){
 async function loadConfiguration(){
 
     await bootStep("Reading system configuration...");
-
-    await bootStep(
-        `Platform : ${systemInfo.platform}`,
-        "INFO"
-    );
-
-    await bootStep(
-        `Language : ${systemInfo.language}`,
-        "INFO"
-    );
 
     const configLoaded = true;
 
@@ -112,12 +123,7 @@ async function loadConfiguration(){
 async function loadTheme(){
 
     await bootStep("Loading UI Engine...");
-
-    
-    await bootStep(
-        `Resolution : ${systemInfo.screenWidth} × ${systemInfo.screenHeight}`,
-        "INFO"
-    );
+    await bootStep("Applying color scheme...", "INFO");
 
     document.body.classList.add("boot-loaded");
 
@@ -125,12 +131,9 @@ async function loadTheme(){
 
 async function initializeSecurity(){
 
-    await bootStep("Security...");
-    
-    await bootStep(
-        `Timezone : ${systemInfo.timezone}`,
-        "INFO"
-    );
+    await bootStep(formatLine("Checking Cookies", navigator.cookieEnabled ? "OK" : "BLOCKED"), "INFO");
+    await bootStep(formatLine("Checking HTTPS", location.protocol === "https:" ? "OK" : "INSECURE"), "INFO");
+    await bootStep(formatLine("Checking JavaScript", "OK"), "INFO");
 
     const securityStatus = true;
 
@@ -138,17 +141,18 @@ async function initializeSecurity(){
         throw new Error("Security Failed");
     }
 
-    await bootStep("Security Online","INFO");
+    await bootStep("Security Online", "INFO");
+
 }
 
 async function loadPortfolio(){
 
     bootHeader("PORTFOLIO");
 
-    await bootStep("Loading Projects...");
-    await bootStep("Loading Certificates...");
-    await bootStep("Loading Skills...");
-    await bootStep("Loading GitHub Cache...");
+    const projectCount = document.querySelectorAll(".project-card").length;
+
+    await bootStep("Loading Projects...", "INFO");
+    await bootStep(formatLine("Projects Loaded", projectCount), "OK");
 
     const portfolioLoaded = true;
 
@@ -156,7 +160,7 @@ async function loadPortfolio(){
         throw new Error("Portfolio Missing");
     }
 
-    await bootStep("Portfolio Database Ready","INFO");
+    await bootStep("Portfolio Database Ready", "INFO");
 
 }
 
@@ -165,9 +169,7 @@ async function initializeTerminal(){
     bootHeader("TERMINAL");
 
     await bootStep("Starting Command Engine...");
-    await bootStep("Loading Terminal Commands...");
     await bootStep("Initializing History...");
-    await bootStep("Preparing Shell...");
 
     const terminalReady = true;
 
@@ -175,7 +177,7 @@ async function initializeTerminal(){
         throw new Error("Terminal Failed");
     }
 
-    await bootStep("Terminal Ready","INFO");
+    await bootStep("Terminal Ready", "INFO");
 
 }
 
@@ -194,6 +196,18 @@ function trimBootOutput(){
 function getBootTime(){
 
     return new Date().toLocaleTimeString();
+
+}
+
+// ==========================
+//  FORMAT A HARDWARE/REPORT LINE
+// ==========================
+
+function formatLine(label, value, width = 22){
+
+    const dots = ".".repeat(Math.max(width - label.length, 3));
+
+    return `${label}${dots}${value}`;
 
 }
 
@@ -413,6 +427,17 @@ function bootComplete(){
         `Boot Time : ${duration} seconds`,
         "INFO"
     );
+
+    // Auto-continue into the terminal
+    setTimeout(() => {
+
+        bootLog("Launching Developer Terminal...", "SUCCESS");
+
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 900);   // small pause so the message is actually readable before navigating
+
+    }, 1000);   // pause after "System Ready" before showing the next line
 
 }
 
