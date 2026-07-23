@@ -54,6 +54,21 @@ body{
 }
 
 /* ==========================
+      BOOT BANNER
+========================== */
+.boot-banner{
+
+    color:#22C55E;
+
+    font-family:"JetBrains Mono", monospace;
+
+    line-height:1.7;
+
+    margin-bottom:20px;
+
+}
+
+/* ==========================
       TERMINAL WINDOW
 ========================== */
 
