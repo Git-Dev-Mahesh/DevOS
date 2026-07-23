@@ -1,25 +1,26 @@
 // This part is 
-// actually detect information from the visitor's browser.
+// actually detect information from the visitor's browser hardware.
+
 
 const systemInfo = {
 
-    cpu: navigator.hardwareConcurrency || "Unknown",
+    cpu: navigator.hardwareConcurrency ?? "Unknown",
 
-    memory: navigator.deviceMemory || "Unknown",
+    memory: navigator.deviceMemory ?? "Unavailable",
 
-    language: navigator.language,
+    platform: navigator.userAgentData?.platform
+        ?? navigator.platform
+        ?? "Unknown",
 
-    platform: navigator.platform,
+    language: navigator.language ?? "Unknown",
 
-    userAgent: navigator.userAgent,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+        ?? "Unknown",
 
-    screenWidth: screen.width,
+    screenWidth: window.screen.width,
 
-    screenHeight: screen.height,
-
-    colorDepth: screen.colorDepth,
-
-    timezone:
-        Intl.DateTimeFormat().resolvedOptions().timeZone
+    screenHeight: window.screen.height
+    
 
 };
+
