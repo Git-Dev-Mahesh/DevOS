@@ -5,6 +5,16 @@ const bootOutput = document.getElementById("bootOutput");
 const progressFill = document.getElementById("progressFill");
 const progressText = document.getElementById("progressText");
 
+// Create progress variables
+let currentProgress = 0;
+let totalBootSteps = 0;
+
+// TIMER
+let bootStartTime = 0;
+
+// Save the Session
+const bootSession = generateSessionID();
+
 
 // GIVING CONNECTION FOR BOOT SEQUENCE FUNCTION
 
@@ -46,17 +56,28 @@ const bootSequence = [
 
 async function initializeKernel(){
 
-    await bootStep("Loading DevOS Kernel");
+    await bootStep("DevOS Boot Manager v1.0.0");
     
     await bootStep(
         `CPU Threads : ${systemInfo.cpu}`,
         "INFO"
     );
 
-    await bootStep(
-        `RAM : ${systemInfo.memory} GB`,
-        "INFO"
-    );
+    if (systemInfo.memory !== "Unavailable") {
+
+        await bootStep(
+            `MEMORY CLASS : ${systemInfo.memory} GB`,
+            "INFO"
+        );
+
+    } else {
+
+        await bootStep(
+            "MEMORY CLASS : Hardware API Not Supported",
+            "WARN"
+        );
+
+    }
 
     const kernelVersion = "DevOS Kernel v1.0.0";
 
@@ -160,12 +181,20 @@ async function initializeTerminal(){
 
 const MAX_DOM_LINES = 15;   
 // num of sequence line can be display 
-// (old sequence disapear and new sequence appear automatically)
+// ( old sequence disapear and new sequence appear automatically )
 
 function trimBootOutput(){
     while(bootOutput.children.length > MAX_DOM_LINES){
         bootOutput.removeChild(bootOutput.firstElementChild);
     }
+}
+
+// Current Time
+
+function getBootTime(){
+
+    return new Date().toLocaleTimeString();
+
 }
 
 // CREATE A LOGGER
@@ -176,7 +205,7 @@ function bootLog(message, status = ""){
 
     if(status !== ""){
         const color =
-            status === "OK" ? "ok" :
+             status === "OK" ? "ok" :
             status === "FAILED" ? "failed" : "success";
 
         statusHTML = `<span class="${color}">[ ${status} ]</span>`;
@@ -232,24 +261,85 @@ function delay(ms){
 
 }
 
-async function bootStep(message, status = "...") {
+async function bootStep(message, status = "..."){
 
     bootLog(message, status);
 
-    await delay(400);
+    currentProgress++;
+
+    const percent = Math.round(
+
+        (currentProgress / totalBootSteps) * 100
+
+    );
+
+    updateProgress(percent);
+
+    await delay(100);
 
 }
 
-async function bootInfo(type, message){
+// ==========================
+// CREATE A SESSION ID
+// ==========================
+
+function generateSessionID(){
+
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    let id = "DEV-";
+
+    for(let i = 0; i < 4; i++){
+
+        id += chars[Math.floor(Math.random() * chars.length)];
+
+    }
+
+    id += "-";
+
+    for(let i = 0; i < 4; i++){
+
+        id += chars[Math.floor(Math.random() * chars.length)];
+
+    }
+
+    return id;
+
+}
+
+// ==========================
+// BOOT BANNER
+// ==========================
+
+function bootBanner(){
 
     bootOutput.insertAdjacentHTML(
-        "beforeend",
-        `<div class="boot-step"><span class="boot-type">${type}</span>${message}</div>`
-    );
 
-    bootOutput.scrollTop = bootOutput.scrollHeight;
-    trimBootOutput();
-    await delay(350);
+        "beforeend",
+
+        `
+        <div class="boot-banner">
+
+            ========================================<br>
+
+            &nbsp;&nbsp;DevOS Boot Manager v1.0.0<br>
+
+            ========================================<br>
+
+            Boot Mode&nbsp;&nbsp;&nbsp;: Visitor<br>
+
+            Boot Type&nbsp;&nbsp;&nbsp;: Cold Boot<br>
+
+            Session ID&nbsp;&nbsp;: ${bootSession}<br>
+
+            Boot Time&nbsp;&nbsp;&nbsp;: ${getBootTime()}<br>
+
+            ========================================
+
+        </div>
+        `
+
+    );
 
 }
 
@@ -262,8 +352,22 @@ async function bootInfo(type, message){
 // =============================
 
 async function startBootSequence(){
+    
+    currentProgress = 0;
+    totalBootSteps = 23;
+    updateProgress(0);
 
     bootOutput.innerHTML = "";
+
+    bootBanner();
+
+    await delay(300);
+
+    // Reset Progress
+    
+
+    // TIMER
+    bootStartTime = performance.now();
 
     for(let i = 0; i < bootSequence.length; i++){
 
@@ -286,10 +390,6 @@ async function startBootSequence(){
 
         }
 
-        updateProgress(
-            Math.round(((i + 1) / bootSequence.length) * 100)
-        );
-
     }
 
     bootComplete();
@@ -299,12 +399,22 @@ async function startBootSequence(){
 // ==========================
 // BOOT COMPLETE
 // ==========================
+
 function bootComplete(){
+
+    const bootEndTime = performance.now();
+
+    const duration =
+        ((bootEndTime - bootStartTime) / 1000).toFixed(2);
 
     bootLog("System Ready", "SUCCESS");
 
-}
+    bootLog(
+        `Boot Time : ${duration} seconds`,
+        "INFO"
+    );
 
+}
 
 
 startBootSequence();
