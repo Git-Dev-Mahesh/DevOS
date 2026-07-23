@@ -131,36 +131,86 @@ async function loadTheme(){
 
 async function initializeSecurity(){
 
-    await bootStep(formatLine("Checking Cookies", navigator.cookieEnabled ? "OK" : "BLOCKED"), "INFO");
-    await bootStep(formatLine("Checking HTTPS", location.protocol === "https:" ? "OK" : "INSECURE"), "INFO");
-    await bootStep(formatLine("Checking JavaScript", "OK"), "INFO");
+    bootHeader("SECURITY MODULE");
 
-    const securityStatus = true;
+    const cookiesOK = checkCookies();
+    await bootStep(
+        formatLine("Checking Cookies", cookiesOK ? "" : "BLOCKED"),
+        cookiesOK ? "OK" : "WARN"
+    );
+
+    const localOK = checkLocalStorage();
+    await bootStep(
+        formatLine("Checking Local Storage", localOK ? "" : "BLOCKED"),
+        localOK ? "OK" : "WARN"
+    );
+
+    const sessionOK = checkSessionStorage();
+    await bootStep(
+        formatLine("Checking Session Storage", sessionOK ? "" : "BLOCKED"),
+        sessionOK ? "OK" : "WARN"
+    );
+
+    const httpsOK = checkHTTPS();
+    await bootStep(
+        formatLine("Checking HTTPS", httpsOK ? "" : "INSECURE"),
+        httpsOK ? "OK" : "WARN"
+    );
+
+    await bootStep(
+        formatLine("Checking JavaScript" , ""),
+        "OK"
+    );
+
+    const devMode = checkDevMode();
+    await bootStep(
+        formatLine("Checking Developer Mode", devMode ? "DETECTED" : "SAFE"),
+        devMode ? "WARN" : "OK"
+    );
+
+    const securityStatus = cookiesOK && localOK && sessionOK;
 
     if(!securityStatus){
-        throw new Error("Security Failed");
+        throw new Error("Security Module Failed — Storage Blocked");
     }
 
-    await bootStep("Security Online", "INFO");
+    await bootStep("Security Online", "OK");
 
 }
 
 async function loadPortfolio(){
 
-    bootHeader("PORTFOLIO");
+    bootHeader("PORTFOLIO DATABASE");
 
-    const projectCount = document.querySelectorAll(".project-card").length;
+    const projectCount = await getProjectCountFromPortfolio();
 
-    await bootStep("Loading Projects...", "INFO");
-    await bootStep(formatLine("Projects Loaded", projectCount), "OK");
+    await bootStep(
+        formatLine("Projects Loaded", projectCount),
+        projectCount > 0 ? "OK" : "WARN"
+    );
 
-    const portfolioLoaded = true;
+    await bootStep(
+        formatLine("Certificates", "Module Not Built"),
+        "WARN"
+    );
+
+    await bootStep(
+        formatLine("Skills", "Module Not Built"),
+        "WARN"
+    );
+
+    await bootStep(
+        formatLine("Blog Articles", "Module Not Built"),
+        "WARN"
+    );
+
+    const portfolioLoaded = projectCount > 0;
 
     if(!portfolioLoaded){
-        throw new Error("Portfolio Missing");
+        throw new Error("Portfolio Database Empty");
     }
 
-    await bootStep("Portfolio Database Ready", "INFO");
+    await bootStep("Portfolio Database Ready", "OK");
 
 }
 
@@ -181,6 +231,22 @@ async function initializeTerminal(){
 
 }
 
+async function getProjectCountFromPortfolio(){
+
+    try{
+        const response = await fetch("index.html");
+        const html = await response.text();
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+
+        return doc.querySelectorAll(".project-card").length;
+    }
+    catch(e){
+        return 0;
+    }
+
+}
 const MAX_DOM_LINES = 15;   
 // num of sequence line can be display 
 // ( old sequence disapear and new sequence appear automatically )
@@ -197,6 +263,56 @@ function getBootTime(){
 
     return new Date().toLocaleTimeString();
 
+}
+
+// ==========================
+//  SECURITY CHECKS
+// ==========================
+
+function checkCookies(){
+    try{
+        return navigator.cookieEnabled;
+    }
+    catch(e){
+        return false;
+    }
+}
+
+function checkLocalStorage(){
+    try{
+        const testKey = "__devos_test__";
+        localStorage.setItem(testKey, "1");
+        localStorage.removeItem(testKey);
+        return true;
+    }
+    catch(e){
+        return false;
+    }
+}
+
+function checkSessionStorage(){
+    try{
+        const testKey = "__devos_test__";
+        sessionStorage.setItem(testKey, "1");
+        sessionStorage.removeItem(testKey);
+        return true;
+    }
+    catch(e){
+        return false;
+    }
+}
+
+function checkHTTPS(){
+    return location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1";
+}
+
+function checkDevMode(){
+    // Heuristic: large gap between outer and inner window size often means devtools is docked open
+    const threshold = 160;
+    const widthDiff = window.outerWidth - window.innerWidth;
+    const heightDiff = window.outerHeight - window.innerHeight;
+
+    return (widthDiff > threshold || heightDiff > threshold);
 }
 
 // ==========================
@@ -281,10 +397,9 @@ async function bootStep(message, status = "..."){
 
     currentProgress++;
 
-    const percent = Math.round(
-
-        (currentProgress / totalBootSteps) * 100
-
+    const percent = Math.min(
+        Math.round((currentProgress / totalBootSteps) * 100),
+        100
     );
 
     updateProgress(percent);
@@ -368,7 +483,7 @@ function bootBanner(){
 async function startBootSequence(){
     
     currentProgress = 0;
-    totalBootSteps = 23;
+    totalBootSteps = 28;
     updateProgress(0);
 
     bootOutput.innerHTML = "";
