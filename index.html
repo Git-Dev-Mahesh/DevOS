@@ -71,67 +71,63 @@
                 <!-- SIDEBAR NAVIGATION -->
 
                 <nav class="sidebar-nav">
-
+                    
                     <ul>
                         <li>
-                            <a href="#hero" class="active">
-                                <i class="fa-solid fa-house"></i>
-                                Home
+                            <a href="#home" data-route="hero" class="active">
+                                <i class="fa-solid fa-house"></i> Home
                             </a>
                         </li>
-                        
+
                         <li>
-                            <a href="#about">
-                                <i class="fa-solid fa-user"></i>
-                                About
+                            <a href="#about" data-route="hero">
+                                <i class="fa-solid fa-user"></i> About
                             </a>
                         </li>
-                        
+
                         <li>
-                            <a href="#projects">
+                            <a href="#projects" data-route="hero">
                                 <i class="fa-solid fa-folder"></i>
-                                    
                                 <span>Projects</span>
                             </a>
                         </li>
-                        
+
                         <li>
-                            <a href="#skills">
-                                <i class="fa-solid fa-laptop-code"></i>
-                                <span>Skills</span>
+                            <a href="#skills" data-route="skills">
+                                <i class="fa-solid fa-laptop-code"></i> <span>Skills</span>
                             </a>
                         </li>
-                        
+
                         <li>
-                            <a href="#">
+                            <a href="#lab" data-route="lab">
                                 <i class="fa-solid fa-flask"></i>
                                 <span>Lab</span>
                             </a>
                         </li>
-                        
+
                         <li>
-                            <a href="#certificates">
-                                <i class="fa-solid fa-award"></i>
-                                <span>Certificates</span>
+                            <a href="#certificates" data-route="certificates">
+                                <i class="fa-solid fa-award"></i> <span>Certificates</span>
                             </a>
                         </li>
-                        
+
                         <li>
-                            <a href="#blog">
+                            <a href="#blog" data-route="blog">
                                 <i class="fa-solid fa-pen"></i>
                                 <span>Blog</span>
                             </a>
                         </li>
-                        
+
                         <li>
-                            <a href="#timeline">
+                            <a href="#timeline" data-route="timeline">
                                 <i class="fa-solid fa-clock"></i>
                                 <span>Timeline</span>
                             </a>
                         </li>
-                        
+
                         <li>
-                            <a href="#contact"><i class="fa-solid fa-envelope"></i>
+                            <a href="#contact" data-route="hero">
+                                <i class="fa-solid fa-envelope"></i>
                                 <span>Contact</span>
                             </a>
                         </li>
@@ -183,702 +179,658 @@
                 
                 </header>
 
+                <!-- existing sections get data-view -->
+
+                <div class="view" data-view="hero">
+
                 <!-- SECTION (HERO / CLOCK / WHEATHER / STATUS / VISITORS)-->
-                 
-                <section id="hero">
+                    
+                    <section id="hero">
 
-                    <div class="hero-grid">
-                        
-                        <div class="hero-main card">
+                        <div class="hero-grid">
+                            
+                            <div class="hero-main card">
 
-                                <div class="hero-content">
+                                    <div class="hero-content">
 
-                                    <span class="hero-status">
-                                        <i class="fa-solid fa-circle"></i>
-                                        SYSTEM ONLINE
-                                    </span>
+                                        <span class="hero-status">
+                                            <i class="fa-solid fa-circle"></i>
+                                            SYSTEM ONLINE
+                                        </span>
 
-                                    <h2>Hi, I'm</h2>
+                                        <h2>Hi, I'm</h2>
 
-                                    <h1><span>Mahesh Milan</span></h1>
+                                        <h1><span>Mahesh Milan</span></h1>
 
-                                    <p class="hero-role">
-                                        Software Engineer | Full Stack Developer | Cloud Enthusiast
-                                    </p>
+                                        <p class="hero-role">
+                                            Software Engineer | Full Stack Developer | Cloud Enthusiast
+                                        </p>
 
-                                    <p class="hero-description">
-                                        I build scalable web and cloud solutions and am expanding into advanced software development.
-                                    </p>
+                                        <p class="hero-description">
+                                            I build scalable web and cloud solutions and am expanding into advanced software development.
+                                        </p>
 
-                                    <div class="hero-buttons">
+                                        <div class="hero-buttons">
 
-                                        <a href="#projects" class="primary-btn">
-                                            View My Work
-                                        </a>
+                                            <a href="#projects" class="primary-btn">
+                                                View My Work
+                                            </a>
 
-                                        <a href="#" class="secondary-btn">
-                                            Download Resume
-                                        </a>
+                                            <a href="#" class="secondary-btn">
+                                                Download Resume
+                                            </a>
+
+                                        </div>
 
                                     </div>
 
-                                </div>
+                                    <div class="hero-image">
+                                    
+                                        <img src="images/hero-bg.png" 
+                                        alt="Hero card image">
 
-                                <div class="hero-image">
-                                
-                                    <img src="images/hero-bg.png" 
-                                    alt="Hero card image">
-
-                                </div>
-
-                        </div>
-
-                        <div class="hero-aside">
-
-                            <div class="card info-card ">
-
-                                <div class="card-title">
-
-                                    <i class="fa-regular fa-clock"></i>
-                                
-                                    <small>Local Time</small>
-
-                                </div>
-
-                                <h3>10:45:30 PM</h3>
-                                
-                                <p>Colombo, Sri Lanka</p>
+                                    </div>
 
                             </div>
 
-                            <div class="card info-card">
+                            <div class="hero-aside">
 
-                                <div class="card-header">
+                                <div class="card info-card ">
 
                                     <div class="card-title">
 
-                                        <i class="fa-solid fa-cloud-sun"></i>
+                                        <i class="fa-regular fa-clock"></i>
+                                    
+                                        <small>Local Time</small>
+
+                                    </div>
+
+                                    <h3>10:45:30 PM</h3>
+                                    
+                                    <p>Colombo, Sri Lanka</p>
+
+                                </div>
+
+                                <div class="card info-card">
+
+                                    <div class="card-header">
+
+                                        <div class="card-title">
+
+                                            <i class="fa-solid fa-cloud-sun"></i>
+                                            
+                                            <small>Weather</small>
+
+                                        </div>
+
+                                        <i class="fa-solid fa-sun weather-icon"></i>
+
+                                    </div>
+
+                                    <h3>27°C</h3>
+
+                                    <p>Colombo, Sri Lanka</p>
+                                </div>
+
+                                <div class="card info-card">
+
+                                    <div class="card-title">
                                         
-                                        <small>Weather</small>
+                                        <i class="fa-solid fa-circle-check"></i>
+                                        
+                                        <small>Status</small>
 
                                     </div>
 
-                                    <i class="fa-solid fa-sun weather-icon"></i>
+                                    <h3 class="online">Available</h3>
+                                    <p>For Opportunities</p>
 
                                 </div>
 
-                                <h3>27°C</h3>
+                                <div class="card info-card">
 
-                                <p>Colombo, Sri Lanka</p>
-                            </div>
+                                    <div class="card-title">
 
-                            <div class="card info-card">
+                                        <i class="fa-solid fa-users"></i>
 
-                                <div class="card-title">
-                                    
-                                    <i class="fa-solid fa-circle-check"></i>
-                                    
-                                    <small>Status</small>
+                                        <small>Visitors</small>
+                                    </div>
+
+                                    <h3>18,263</h3>
+                                    <p>Total Visitors</p>
 
                                 </div>
-
-                                <h3 class="online">Available</h3>
-                                <p>For Opportunities</p>
-
-                            </div>
-
-                            <div class="card info-card">
-
-                                <div class="card-title">
-
-                                    <i class="fa-solid fa-users"></i>
-
-                                    <small>Visitors</small>
-                                </div>
-
-                                <h3>18,263</h3>
-                                <p>Total Visitors</p>
 
                             </div>
 
                         </div>
 
-                    </div>
+                    </section>
 
-                </section>
+                    <!-- SECTION PROJECTS -->
 
-                <!-- SECTION PROJECTS -->
+                    <section id="projects">
 
-                <section id="projects">
+                        <div class="projects-card card">
 
-                    <div class="projects-card card">
-
-                        <div class="section-header">
-
-                            <div class="section-title">
-                                <i class="fa-regular fa-folder-open"></i>
-                                <h3>Featured Projects</h3>
-                            </div>
-
-                            <a href="#" class="view-all">
-                                View All
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-
-                        </div>
-
-                        <div class="projects-grid">
-
-                            <div class="project-card">
-
-                                <div class="project-image">
-
-                                    <img src="images/hero-bg.png"
-                                        alt="Explore Sri Lanka">
-
-                                    <span class="project-status completed">
-                                        <i class="fa-solid fa-circle"></i>
-                                        Completed
-                                    </span>
-
-                                </div>
-
-                                <div class="project-content">
-
-                                    <h3>Explore Sri Lanka</h3>
-                                    
-                                    <small class="project-type">
-                                        Tourism Platform
-                                    </small>
-
-                                    <p>
-                                        Modern tourism platform with booking, travel guides and local attractions.
-                                    </p>
-
-                                    <div class="project-tags">
-
-                                        <span class="tag html">
-                                            <i class="fa-brands fa-html5"></i>
-                                            HTML
-                                        </span>
-
-                                        <span class="tag css">
-                                            <i class="fa-brands fa-css3-alt"></i>
-                                            CSS
-                                        </span>
-
-                                        <span class="tag js">
-                                            <i class="fa-brands fa-js"></i>
-                                            JavaScript
-                                        </span>
-
-                                    </div>
-
-                                    <div class="project-actions">
-
-                                        <a href="#" class="action-btn demo">
-
-                                            <i class="fa-solid fa-play"></i>
-
-                                            <span>Launch</span>
-
-                                        </a>
-
-                                        <a href="#" class="action-btn code">
-
-                                            <i class="fa-solid fa-code"></i>
-
-                                            <span>Source</span>
-
-                                        </a>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="project-card">
-
-                                <div class="project-image">
-
-                                    <img src="images/hero-bg.png"
-                                        alt="Explore Sri Lanka">
-
-                                    <span class="project-status completed">
-                                        <i class="fa-solid fa-circle"></i>
-                                        Completed
-                                    </span>
-
-                                </div>
-
-                                <div class="project-content">
-
-                                    <h3>DevOS Portfolio</h3>
-
-                                    <small class="project-type">
-                                        Personal Portfolio
-                                    </small>
-
-                                    <p>
-                                        Modern tourism platform with booking, travel guides and local attractions.
-                                    </p>
-
-                                    <div class="project-tags">
-
-                                        <span class="tag html">
-                                            <i class="fa-brands fa-html5"></i>
-                                            HTML
-                                        </span>
-
-                                        <span class="tag css">
-                                            <i class="fa-brands fa-css3-alt"></i>
-                                            CSS
-                                        </span>
-
-                                        <span class="tag js">
-                                            <i class="fa-brands fa-js"></i>
-                                            JavaScript
-                                        </span>
-
-                                    </div>
-
-                                    <div class="project-actions">
-
-                                        <a href="#" class="action-btn demo">
-
-                                            <i class="fa-solid fa-play"></i>
-
-                                            <span>Launch</span>
-
-                                        </a>
-
-                                        <a href="#" class="action-btn code">
-
-                                            <i class="fa-solid fa-code"></i>
-
-                                            <span>Source</span>
-
-                                        </a>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                             <div class="project-card">
-
-                                <div class="project-image">
-
-                                    <img src="images/hero-bg.png"
-                                        alt="Explore Sri Lanka">
-
-                                    <span class="project-status completed">
-                                        <i class="fa-solid fa-circle"></i>
-                                        Completed
-                                    </span>
-
-                                </div>
-
-                                <div class="project-content">
-
-                                    <h3>Explore Sri Lanka</h3>
-                                    
-                                    <small class="project-type">
-                                        Tourism Platform
-                                    </small>
-
-                                    <p>
-                                        Modern tourism platform with booking, travel guides and local attractions.
-                                    </p>
-
-                                    <div class="project-tags">
-
-                                        <span class="tag html">
-                                            <i class="fa-brands fa-html5"></i>
-                                            HTML
-                                        </span>
-
-                                        <span class="tag css">
-                                            <i class="fa-brands fa-css3-alt"></i>
-                                            CSS
-                                        </span>
-
-                                        <span class="tag js">
-                                            <i class="fa-brands fa-js"></i>
-                                            JavaScript
-                                        </span>
-
-                                    </div>
-
-                                    <div class="project-actions">
-
-                                        <a href="#" class="action-btn demo">
-
-                                            <i class="fa-solid fa-play"></i>
-
-                                            <span>Launch</span>
-
-                                        </a>
-
-                                        <a href="#" class="action-btn code">
-
-                                            <i class="fa-solid fa-code"></i>
-
-                                            <span>Source</span>
-
-                                        </a>
-
-                                    </div>
-
-                                </div>
-
-                             </div>
-
-                            <div class="project-card">
-
-                                <div class="project-image">
-
-                                    <img src="images/hero-bg.png"
-                                        alt="Explore Sri Lanka">
-
-                                    <span class="project-status completed">
-                                        <i class="fa-solid fa-circle"></i>
-                                        Completed
-                                    </span>
-
-                                </div>
-
-                                <div class="project-content">
-
-                                    <h3>DevOS Portfolio</h3>
-
-                                    <small class="project-type">
-                                        Personal Portfolio
-                                    </small>
-
-                                    <p>
-                                        A modern tourism platform helping visitors discover.
-                                    </p>
-
-                                    <div class="project-tags">
-
-                                        <span class="tag html">
-                                            <i class="fa-brands fa-html5"></i>
-                                            HTML
-                                        </span>
-
-                                        <span class="tag css">
-                                            <i class="fa-brands fa-css3-alt"></i>
-                                            CSS
-                                        </span>
-
-                                        <span class="tag js">
-                                            <i class="fa-brands fa-js"></i>
-                                            JavaScript
-                                        </span>
-
-                                    </div>
-
-                                   <div class="project-actions">
-
-                                        <a href="#" class="action-btn demo">
-
-                                            <i class="fa-solid fa-play"></i>
-
-                                            <span>Launch</span>
-
-                                        </a>
-
-                                        <a href="#" class="action-btn code">
-
-                                            <i class="fa-solid fa-code"></i>
-
-                                            <span>Source</span>
-
-                                        </a>
-
-                                    </div>
-
-                                </div>
-
-                            
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-                <!-- SECTION (ABOUT / GITHUB / TODAY STATS) -->
-
-                <section id="about">
-
-                    <div class="about-layout">
-                        
-                        <!-- Left -->
-
-                        <div class="about-card card">
-                            
                             <div class="section-header">
 
                                 <div class="section-title">
+                                    <i class="fa-regular fa-folder-open"></i>
+                                    <h3>Featured Projects</h3>
+                                </div>
 
-                                    <i class="fa-regular fa-user"></i>
-                                    <h3>About Me</h3>
+                                <a href="#" class="view-all">
+                                    View All
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
 
+                            </div>
+
+                            <div class="projects-grid">
+
+                                <div class="project-card">
+
+                                    <div class="project-image">
+
+                                        <img src="images/hero-bg.png"
+                                            alt="Explore Sri Lanka">
+
+                                        <span class="project-status completed">
+                                            <i class="fa-solid fa-circle"></i>
+                                            Completed
+                                        </span>
+
+                                    </div>
+
+                                    <div class="project-content">
+
+                                        <h3>Explore Sri Lanka</h3>
+                                        
+                                        <small class="project-type">
+                                            Tourism Platform
+                                        </small>
+
+                                        <p>
+                                            Modern tourism platform with booking, travel guides and local attractions.
+                                        </p>
+
+                                        <div class="project-tags">
+
+                                            <span class="tag html">
+                                                <i class="fa-brands fa-html5"></i>
+                                                HTML
+                                            </span>
+
+                                            <span class="tag css">
+                                                <i class="fa-brands fa-css3-alt"></i>
+                                                CSS
+                                            </span>
+
+                                            <span class="tag js">
+                                                <i class="fa-brands fa-js"></i>
+                                                JavaScript
+                                            </span>
+
+                                        </div>
+
+                                        <div class="project-actions">
+
+                                            <a href="#" class="action-btn demo">
+
+                                                <i class="fa-solid fa-play"></i>
+
+                                                <span>Launch</span>
+
+                                            </a>
+
+                                            <a href="#" class="action-btn code">
+
+                                                <i class="fa-solid fa-code"></i>
+
+                                                <span>Source</span>
+
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="project-card">
+
+                                    <div class="project-image">
+
+                                        <img src="images/hero-bg.png"
+                                            alt="Explore Sri Lanka">
+
+                                        <span class="project-status completed">
+                                            <i class="fa-solid fa-circle"></i>
+                                            Completed
+                                        </span>
+
+                                    </div>
+
+                                    <div class="project-content">
+
+                                        <h3>DevOS Portfolio</h3>
+
+                                        <small class="project-type">
+                                            Personal Portfolio
+                                        </small>
+
+                                        <p>
+                                            Modern tourism platform with booking, travel guides and local attractions.
+                                        </p>
+
+                                        <div class="project-tags">
+
+                                            <span class="tag html">
+                                                <i class="fa-brands fa-html5"></i>
+                                                HTML
+                                            </span>
+
+                                            <span class="tag css">
+                                                <i class="fa-brands fa-css3-alt"></i>
+                                                CSS
+                                            </span>
+
+                                            <span class="tag js">
+                                                <i class="fa-brands fa-js"></i>
+                                                JavaScript
+                                            </span>
+
+                                        </div>
+
+                                        <div class="project-actions">
+
+                                            <a href="#" class="action-btn demo">
+
+                                                <i class="fa-solid fa-play"></i>
+
+                                                <span>Launch</span>
+
+                                            </a>
+
+                                            <a href="#" class="action-btn code">
+
+                                                <i class="fa-solid fa-code"></i>
+
+                                                <span>Source</span>
+
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="project-card">
+
+                                    <div class="project-image">
+
+                                        <img src="images/hero-bg.png"
+                                            alt="Explore Sri Lanka">
+
+                                        <span class="project-status completed">
+                                            <i class="fa-solid fa-circle"></i>
+                                            Completed
+                                        </span>
+
+                                    </div>
+
+                                    <div class="project-content">
+
+                                        <h3>Explore Sri Lanka</h3>
+                                        
+                                        <small class="project-type">
+                                            Tourism Platform
+                                        </small>
+
+                                        <p>
+                                            Modern tourism platform with booking, travel guides and local attractions.
+                                        </p>
+
+                                        <div class="project-tags">
+
+                                            <span class="tag html">
+                                                <i class="fa-brands fa-html5"></i>
+                                                HTML
+                                            </span>
+
+                                            <span class="tag css">
+                                                <i class="fa-brands fa-css3-alt"></i>
+                                                CSS
+                                            </span>
+
+                                            <span class="tag js">
+                                                <i class="fa-brands fa-js"></i>
+                                                JavaScript
+                                            </span>
+
+                                        </div>
+
+                                        <div class="project-actions">
+
+                                            <a href="#" class="action-btn demo">
+
+                                                <i class="fa-solid fa-play"></i>
+
+                                                <span>Launch</span>
+
+                                            </a>
+
+                                            <a href="#" class="action-btn code">
+
+                                                <i class="fa-solid fa-code"></i>
+
+                                                <span>Source</span>
+
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="project-card">
+
+                                    <div class="project-image">
+
+                                        <img src="images/hero-bg.png"
+                                            alt="Explore Sri Lanka">
+
+                                        <span class="project-status completed">
+                                            <i class="fa-solid fa-circle"></i>
+                                            Completed
+                                        </span>
+
+                                    </div>
+
+                                    <div class="project-content">
+
+                                        <h3>DevOS Portfolio</h3>
+
+                                        <small class="project-type">
+                                            Personal Portfolio
+                                        </small>
+
+                                        <p>
+                                            A modern tourism platform helping visitors discover.
+                                        </p>
+
+                                        <div class="project-tags">
+
+                                            <span class="tag html">
+                                                <i class="fa-brands fa-html5"></i>
+                                                HTML
+                                            </span>
+
+                                            <span class="tag css">
+                                                <i class="fa-brands fa-css3-alt"></i>
+                                                CSS
+                                            </span>
+
+                                            <span class="tag js">
+                                                <i class="fa-brands fa-js"></i>
+                                                JavaScript
+                                            </span>
+
+                                        </div>
+
+                                    <div class="project-actions">
+
+                                            <a href="#" class="action-btn demo">
+
+                                                <i class="fa-solid fa-play"></i>
+
+                                                <span>Launch</span>
+
+                                            </a>
+
+                                            <a href="#" class="action-btn code">
+
+                                                <i class="fa-solid fa-code"></i>
+
+                                                <span>Source</span>
+
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+
+                                
                                 </div>
 
                             </div>
 
-                            <div class="about-content">
-                                
-                                <div class="about-left">
-
-                                    <img 
-                                    src="images/profile.png" 
-                                    alt="profile picture" class="profile-image">
-
-                                </div>
-
-                                <div class="about-right">
-
-                                
-                                    <p class="about-description">
-                                        I'm a passionate Software Engineer focused on building modern web applications, cloud solutions, and software that solves real-world problems.
-
-                                        I enjoy learning new technologies and turning ideas into polished digital products.
-                                    </p>
-
-                                    
-                                    <div class="about-stats">
-
-                                        <div class="stat-box">
-                                            <h3>25+</h3>
-                                            <small>Projects</small>
-                                        </div>
-
-                                        <div class="stat-box">
-                                            <h3>8</h3>
-                                            <small>Certificates</small>
-                                        </div>
-
-                                        <div class="stat-box">
-                                            <h3>20+</h3>
-                                            <small>Technologies</small>
-                                        </div>
-
-                                        <div class="stat-box">
-                                            <h3>∞</h3>
-                                            <small>Coffee</small>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="about-info">
-
-                                <div class="info-item">
-
-                                    <i class="fa-solid fa-location-dot"></i>
-                                
-                                    <div>
-
-                                        <small>Location</small>
-                                        <p>Sri Lanka</p>
-                                    
-                                    </div>
-                                
-                                </div>
-
-                                <div class="info-item">
-
-                                    <i class="fa-solid fa-briefcase"></i>
-
-                                    <div>
-
-                                        <small>Experience</small>
-                                        <p>2+ Years</p>
-
-                                    </div>
-
-                                </div>
-                                
-                                <div class="info-item">
-
-                                    <i class="fa-solid fa-envelope"></i>
-                                    
-                                    <div>
-
-                                        <small>Email</small>
-                                        <p>mahesh@email.com</p>
-                                    
-                                    </div>
-
-                                </div>
-
-                                <div class="info-item">
-
-                                    <i class="fa-solid fa-circle-check"></i>
-
-                                    <div>
-
-                                        <small>Availability</small>
-                                        <p class="online">Open to work</p>
-
-                                    </div>
-                    
-                                </div>
-
-                            </div>
-
-                            <a href="#" class="secondary-btn">
-                                Know More About Me
-                            </a>
-                
                         </div>
-                        
-                        <!-- Right -->
 
-                        <div class="about-side">
+                    </section>
 
-                            <!-- GitHub Card -->
+                    <!-- SECTION (ABOUT / GITHUB / TODAY STATS) -->
 
-                            <div class="card github-card">
+                    <section id="about">
 
-                                <h3>GitHub Overview</h3>
+                        <div class="about-layout">
+                            
+                            <!-- Left -->
 
-                                <div class="github-grid">
-
-                                    <div>
-
-                                        <h2>42</h2>
-
-                                        <small>Repositories</small>
-                                    
-                                    </div>
-
-                                    <div>
-
-                                        <h2>386</h2>
-                                        <small>Commits</small>
-
-                                    </div>
-
-                                    <div>
-
-                                        <h2>18</h2>
-
-                                        <small>Stars</small>
-
-                                    </div>
-
-                                    <div>
-
-                                        <h2>14</h2>
-
-                                        <small>Contributions</small>
-
-                                    </div>
-
-                                </div>
-
-                                    <div class="github-footer">
-
-                                        <span>Latest Commit: Update portfolio UI</span>
-
-                                        <span>2 hours ago</span>
-
-                                    </div>
-
-                            </div>
-
-                            <div class="card stats-card">
-
+                            <div class="about-card card">
+                                
                                 <div class="section-header">
 
                                     <div class="section-title">
 
-                                        <i class="fa-solid fa-chart-column"></i>
+                                        <i class="fa-regular fa-user"></i>
+                                        <h3>About Me</h3>
 
-                                        <h3>Today's Stats</h3>
-                                        
                                     </div>
 
                                 </div>
 
-                                <div class="stats-list">
+                                <div class="about-content">
+                                    
+                                    <div class="about-left">
 
-                                    <div class="stat-item">
+                                        <img 
+                                        src="images/profile.png" 
+                                        alt="profile picture" class="profile-image">
 
-                                        <div class="stat-icon coding">
+                                    </div>
 
-                                            <i class="fa-solid fa-laptop-code"></i>
+                                    <div class="about-right">
+
+                                    
+                                        <p class="about-description">
+                                            I'm a passionate Software Engineer focused on building modern web applications, cloud solutions, and software that solves real-world problems.
+
+                                            I enjoy learning new technologies and turning ideas into polished digital products.
+                                        </p>
+
+                                        
+                                        <div class="about-stats">
+
+                                            <div class="stat-box">
+                                                <h3>25+</h3>
+                                                <small>Projects</small>
+                                            </div>
+
+                                            <div class="stat-box">
+                                                <h3>8</h3>
+                                                <small>Certificates</small>
+                                            </div>
+
+                                            <div class="stat-box">
+                                                <h3>20+</h3>
+                                                <small>Technologies</small>
+                                            </div>
+
+                                            <div class="stat-box">
+                                                <h3>∞</h3>
+                                                <small>Coffee</small>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="about-info">
+
+                                    <div class="info-item">
+
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    
+                                        <div>
+
+                                            <small>Location</small>
+                                            <p>Sri Lanka</p>
+                                        
+                                        </div>
+                                    
+                                    </div>
+
+                                    <div class="info-item">
+
+                                        <i class="fa-solid fa-briefcase"></i>
+
+                                        <div>
+
+                                            <small>Experience</small>
+                                            <p>2+ Years</p>
+
+                                        </div>
+
+                                    </div>
+                                    
+                                    <div class="info-item">
+
+                                        <i class="fa-solid fa-envelope"></i>
+                                        
+                                        <div>
+
+                                            <small>Email</small>
+                                            <p>mahesh@email.com</p>
+                                        
+                                        </div>
+
+                                    </div>
+
+                                    <div class="info-item">
+
+                                        <i class="fa-solid fa-circle-check"></i>
+
+                                        <div>
+
+                                            <small>Availability</small>
+                                            <p class="online">Open to work</p>
+
+                                        </div>
+                        
+                                    </div>
+
+                                </div>
+
+                                <a href="#" class="secondary-btn">
+                                    Know More About Me
+                                </a>
+                    
+                            </div>
+                            
+                            <!-- Right -->
+
+                            <div class="about-side">
+
+                                <!-- GitHub Card -->
+
+                                <div class="card github-card">
+
+                                    <h3>GitHub Overview</h3>
+
+                                    <div class="github-grid">
+
+                                        <div>
+
+                                            <h2>42</h2>
+
+                                            <small>Repositories</small>
+                                        
+                                        </div>
+
+                                        <div>
+
+                                            <h2>386</h2>
+                                            <small>Commits</small>
+
+                                        </div>
+
+                                        <div>
+
+                                            <h2>18</h2>
+
+                                            <small>Stars</small>
+
+                                        </div>
+
+                                        <div>
+
+                                            <h2>14</h2>
+
+                                            <small>Contributions</small>
+
+                                        </div>
+
+                                    </div>
+
+                                        <div class="github-footer">
+
+                                            <span>Latest Commit: Update portfolio UI</span>
+
+                                            <span>2 hours ago</span>
+
+                                        </div>
+
+                                </div>
+
+                                <div class="card stats-card">
+
+                                    <div class="section-header">
+
+                                        <div class="section-title">
+
+                                            <i class="fa-solid fa-chart-column"></i>
+
+                                            <h3>Today's Stats</h3>
                                             
                                         </div>
 
-                                        <div class="stat-info">
-
-                                            <small>Coding Time</small>
-
-                                            <h4>5h 24m</h4>
-
-                                            <div class="mini-progress">
-
-                                                <div class="mini-fill coding-fill"></div>
-
-                                            </div>
-
-                                        </div>
-
                                     </div>
 
-                                    <div class="stat-item">
+                                    <div class="stats-list">
 
-                                        <div class="stat-icon coffee">
+                                        <div class="stat-item">
 
-                                            <i class="fa-solid fa-mug-hot"></i>
+                                            <div class="stat-icon coding">
 
-                                        </div>
-
-                                        <div class="stat-info">
-
-                                            <small>Coffee</small>
-
-                                            <h4>03 Cups</h4>
-
-                                            <div class="mini-progress">
-
-                                                <div class="mini-fill coffee-fill"></div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="stat-item">
-
-                                            <div class="stat-icon tasks">
-
-                                                <i class="fa-solid fa-list-check"></i>
+                                                <i class="fa-solid fa-laptop-code"></i>
                                                 
                                             </div>
 
                                             <div class="stat-info">
 
-                                                <small>Taks Done</small>
-                                                
-                                                <h4>12</h4>
+                                                <small>Coding Time</small>
+
+                                                <h4>5h 24m</h4>
 
                                                 <div class="mini-progress">
 
-                                                    <div class="mini-fill task-fill"></div>
+                                                    <div class="mini-fill coding-fill"></div>
 
                                                 </div>
 
@@ -888,23 +840,21 @@
 
                                         <div class="stat-item">
 
-                                            <div class="stat-icon learning">
+                                            <div class="stat-icon coffee">
 
-                                                <i class="fa-solid fa-book-open"></i>
+                                                <i class="fa-solid fa-mug-hot"></i>
 
                                             </div>
 
                                             <div class="stat-info">
 
-                                                <small>Learning</small>
+                                                <small>Coffee</small>
 
-                                                <h4>2.5 Hours</h4>
+                                                <h4>03 Cups</h4>
 
                                                 <div class="mini-progress">
 
-                                                    <div class="mini-fill learning-fill">
-
-                                                    </div>
+                                                    <div class="mini-fill coffee-fill"></div>
 
                                                 </div>
 
@@ -912,76 +862,226 @@
 
                                         </div>
 
-                                    </div> 
-                                
+                                        <div class="stat-item">
+
+                                                <div class="stat-icon tasks">
+
+                                                    <i class="fa-solid fa-list-check"></i>
+                                                    
+                                                </div>
+
+                                                <div class="stat-info">
+
+                                                    <small>Taks Done</small>
+                                                    
+                                                    <h4>12</h4>
+
+                                                    <div class="mini-progress">
+
+                                                        <div class="mini-fill task-fill"></div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="stat-item">
+
+                                                <div class="stat-icon learning">
+
+                                                    <i class="fa-solid fa-book-open"></i>
+
+                                                </div>
+
+                                                <div class="stat-info">
+
+                                                    <small>Learning</small>
+
+                                                    <h4>2.5 Hours</h4>
+
+                                                    <div class="mini-progress">
+
+                                                        <div class="mini-fill learning-fill">
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div> 
+                                    
+                                    </div>
+
+                            </div> 
+                        
+                        </div>                   
+                            
+                    </section> 
+
+                    <!-- DEVOS TERMINAL -->
+
+                    <section id="terminal">
+
+                        <div class="terminal-card card">
+
+                            <!-- Terminal Header -->
+
+                            <div class="terminal-header">
+
+                                <div class="terminal-buttons">
+
+                                    <span class="red"></span>
+                                    <span class="yellow"></span>
+                                    <span class="green"></span>
+
                                 </div>
 
-                        </div> 
-                    
-                    </div>                   
-                         
-                </section> 
-
-                <!-- DEVOS TERMINAL -->
-
-                <section id="terminal">
-
-                    <div class="terminal-card card">
-
-                        <!-- Terminal Header -->
-
-                        <div class="terminal-header">
-
-                            <div class="terminal-buttons">
-
-                                <span class="red"></span>
-                                <span class="yellow"></span>
-                                <span class="green"></span>
+                                <h3>DevOS Terminal</h3>
 
                             </div>
 
-                            <h3>DevOS Terminal</h3>
+                            <!-- Terminal Body -->
+
+                            <div class="terminal-body">
+
+                                <div id="terminal-output">
+
+                                    <p>Welcome to DevOS v1.0</p>
+
+                                    <p>Type <span class="terminal-command">help</span> to begin.</p>
+
+                                </div>
+
+                                <div class="terminal-input">
+
+                                    <span class="prompt">
+                                        devos@system:~$
+                                    </span>
+
+                                    <input
+                                        id="terminalInput"
+                                        type="text"
+                                        autocomplete="off"
+                                        spellcheck="false">
+
+                                </div>
+
+                            </div>
 
                         </div>
 
-                        <!-- Terminal Body -->
+                    </section>
 
-                        <div class="terminal-body">
+                </div>
 
-                            <div id="terminal-output">
+                <div class="view" data-view="skills">
 
-                                <p>Welcome to DevOS v1.0</p>
+                    <div class="skills-header card">
 
-                                <p>Type <span class="terminal-command">help</span> to begin.</p>
+                        <div class="skills-title-block">
+                            <span class="skills-eyebrow">
+                                <i class="fa-solid fa-chevron-left"></i> DEVELOPER STACK
+                            </span>
+                            <h1>Skills <span>Matrix</span></h1>
+                            <p>Explore my technical skills and experience across multiple technologies and domains.</p>
+                        </div>
 
+                        <div class="skills-summary-cards">
+
+                            <div class="summary-mini-card">
+                                <i class="fa-solid fa-display"></i>
+                                <div>
+                                    <h3 id="skillsTechCount">0+</h3>
+                                    <small>Technologies</small>
+                                </div>
                             </div>
 
-                            <div class="terminal-input">
+                            <div class="summary-mini-card">
+                                <i class="fa-solid fa-code"></i>
+                                <div>
+                                    <h3 id="skillsProjectCount">0+</h3>
+                                    <small>Projects</small>
+                                </div>
+                            </div>
 
-                                <span class="prompt">
-                                    devos@system:~$
-                                </span>
+                            <div class="summary-mini-card">
+                                <i class="fa-solid fa-certificate"></i>
+                                <div>
+                                    <h3>8</h3>
+                                    <small>Certificates</small>
+                                </div>
+                            </div>
 
-                                <input
-                                    id="terminalInput"
-                                    type="text"
-                                    autocomplete="off"
-                                    spellcheck="false">
-
+                            <div class="summary-mini-card">
+                                <i class="fa-solid fa-chart-line"></i>
+                                <div>
+                                    <h3>2+</h3>
+                                    <small>Years Experience</small>
+                                </div>
                             </div>
 
                         </div>
 
                     </div>
 
-                </section>
+                    <div class="skills-body">
+
+                        <!-- LEFT: Skill Explorer Tree -->
+                        <div class="card skill-explorer">
+
+                            <h4>SKILL EXPLORER</h4>
+
+                            <div id="skillTree"></div>
+
+                        </div>
+
+                        <!-- CENTER: Search + Grid -->
+                        <div class="skills-center">
+
+                            <div class="card skills-search-bar">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="skillSearch" placeholder="Search technologies...">
+                            </div>
+
+                            <div class="skills-grid" id="skillsGrid"></div>
+
+                        </div>
+
+                        <!-- RIGHT: Detail Panel -->
+                        <div class="card skill-detail" id="skillDetail">
+                            <p class="skill-detail-empty">Select a skill to see details</p>
+                        </div>
+
+                    </div>
+
+                    <!-- FOOTER: Technology Summary -->
+                    <div class="card skills-footer">
+                        <h4>TECHNOLOGY SUMMARY</h4>
+                        <div class="tech-summary-grid" id="techSummaryGrid"></div>
+                    </div>
+
+                </div>
+
+                <div class="view" data-view="certificates" hidden>
+                    <!-- placeholder for now -->
+                </div>
+
+                <div class="view" data-view="timeline" hidden></div>
+                <div class="view" data-view="blog" hidden></div>
+                <div class="view" data-view="lab" hidden></div>
+                <div class="view" data-view="contact" hidden></div>
                
             </main>
         
         </div>
 
         <!-- JAVASCRIPT -->
-
+        <script src="js/router.js"></script>
+        <script src="js/skills.js"></script>
         <script src="js/app.js"></script>
         <script src="js/commands.js"></script>
         <script src="js/terminal.js"></script>
