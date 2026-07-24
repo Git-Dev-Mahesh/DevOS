@@ -39,11 +39,26 @@ function handleRouteChange(){
 
     showView(targetView);
 
-    if(hash === "about" || hash === "projects" || hash === "contact"){
-        setTimeout(() => {
-            document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
-        }, 50);
+    navLinks.forEach(link => link.classList.remove("active"));
+
+    // Activate only clicked link
+    const activeLink = document.querySelector(
+        `.sidebar-nav a[href="#${hash}"]`
+    );
+
+    if (activeLink) {
+        activeLink.classList.add("active");
     }
+
+    // Scroll to section
+    const section =
+        document.getElementById(hash) ||
+        document.getElementById("hero");
+
+    section.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 
 }
 
