@@ -125,7 +125,11 @@ setInterval(updateWeather, 10 * 60 * 1000);   // refresh every 10 minutes
 //  AVAILABILITY STATUS
 // ==========================
 
-const isAvailableForWork = true;   // 👈 change this by hand when your availability changes
+// ==========================
+//  AVAILABILITY STATUS
+// ==========================
+
+// delete this whole block — replaced by the Firestore version in about.js
 
 function updateStatus(){
 
@@ -148,5 +152,3 @@ function updateStatus(){
     }
 
 }
-
-updateStatus();

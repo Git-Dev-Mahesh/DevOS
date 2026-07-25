@@ -25,14 +25,12 @@ function handleRouteChange(){
 
     const routeMap = {
         home: "hero",
-        about: "hero",
-        projects: "hero",
+        about: "about",
+        projects: "projects",
         skills: "skills",
         certificates: "certificates",
-        timeline: "timeline",
         blog: "blog",
-        lab: "lab",
-        contact: "hero"
+        contact: "contact"
     };
 
     const targetView = routeMap[hash] || "hero";

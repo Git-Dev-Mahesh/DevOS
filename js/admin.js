@@ -1,4 +1,82 @@
 // ==========================
+//  ADMIN — ABOUT TAB
+// ==========================
+
+import { setDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+async function renderAboutTab(){
+
+    console.log("About tab clicked");
+
+    tabContent.innerHTML = `<p style="color:var(--secondary)">Loading...</p>`;
+
+    const snapshot = await getDocs(collection(db, "about"));
+    const existing = snapshot.empty ? {} : snapshot.docs[0].data();
+
+    tabContent.innerHTML = `
+
+        <div class="admin-modal-box" style="width:600px;margin:0">
+
+            <div class="input-group">
+                <label>Description</label>
+                <textarea id="aboutDesc" style="min-height:100px">${existing.description || ""}</textarea>
+            </div>
+
+            <div class="input-group">
+                <label>Location</label>
+                <input type="text" id="aboutLocation" value="${existing.location || ""}">
+            </div>
+
+            <div class="input-group">
+                <label>Experience</label>
+                <input type="text" id="aboutExperience" placeholder="e.g. 2+ Years" value="${existing.experience || ""}">
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="text" id="aboutEmail" value="${existing.email || ""}">
+            </div>
+
+            <div class="input-group">
+                <label>Available for Work</label>
+                <select id="aboutAvailable">
+                    <option value="true" ${existing.available !== false ? "selected" : ""}>Yes — Available</option>
+                    <option value="false" ${existing.available === false ? "selected" : ""}>No — Not Available</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Profile Image URL</label>
+                <input type="text" id="aboutImage" value="${existing.imageUrl || ""}">
+            </div>
+
+            <button id="aboutSaveBtn" class="admin-add-btn" type="button" style="width:100%">Save About Info</button>
+            <p id="aboutSaveStatus" style="color:var(--secondary);font-size:.8rem;margin-top:10px"></p>
+
+        </div>
+
+    `;
+
+    document.getElementById("aboutSaveBtn").addEventListener("click", async () => {
+
+    const data = {
+        description: document.getElementById("aboutDesc").value.trim(),
+        location: document.getElementById("aboutLocation").value.trim(),
+        experience: document.getElementById("aboutExperience").value.trim(),
+        email: document.getElementById("aboutEmail").value.trim(),
+        imageUrl: document.getElementById("aboutImage").value.trim(),
+        available: document.getElementById("aboutAvailable").value === "true"   // 👈 add this
+    };
+
+    await setDoc(doc(db, "about", "profile"), data);
+
+    document.getElementById("aboutSaveStatus").textContent = "✔ Saved";
+
+});
+
+}
+
+// ==========================
 //  ADMIN — PROJECTS TAB
 // ==========================
 
@@ -34,6 +112,10 @@ document.querySelectorAll(".admin-nav a").forEach(link => {
         else if(tab === "skills") renderSkillsTab();
 
         else if(tab === "certificates") renderCertificatesTab();
+
+        else if(tab === "blog") renderBlogTab();
+        
+        else if(tab === "about") renderAboutTab();
 
         else{
             tabContent.innerHTML = `<p style="color:var(--secondary)">Coming next: ${tab}</p>`;
@@ -158,6 +240,24 @@ function openProjectForm(id = null, existing = null){
             </div>
 
             <div class="input-group">
+                <label>Category</label>
+                <select id="pCategory">
+                    <option value="Web Apps" ${existing?.category === "Web Apps" ? "selected" : ""}>Web Apps</option>
+                    <option value="Tools" ${existing?.category === "Tools" ? "selected" : ""}>Tools</option>
+                    <option value="Mobile" ${existing?.category === "Mobile" ? "selected" : ""}>Mobile</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Status</label>
+                <select id="pStatus">
+                    <option value="Completed" ${existing?.status === "Completed" ? "selected" : ""}>Completed</option>
+                    <option value="In Progress" ${existing?.status === "In Progress" ? "selected" : ""}>In Progress</option>
+                    <option value="Planned" ${existing?.status === "Planned" ? "selected" : ""}>Planned</option>
+                </select>
+            </div>
+
+            <div class="input-group">
                 <label>Description</label>
                 <textarea id="pDesc">${existing?.description || ""}</textarea>
             </div>
@@ -228,6 +328,8 @@ function openProjectForm(id = null, existing = null){
         const data = {
             title: document.getElementById("pTitle").value.trim(),
             type: document.getElementById("pType").value.trim(),
+            category: document.getElementById("pCategory").value,
+            status: document.getElementById("pStatus").value,
             description: document.getElementById("pDesc").value.trim(),
             repo: document.getElementById("pRepo").value.trim(),
             demoUrl: document.getElementById("pDemo").value.trim(),
@@ -587,6 +689,177 @@ function openCertForm(id = null, existing = null){
 
         modal.remove();
         await loadCertsList();
+
+    });
+
+}
+
+// ==========================
+//  ADMIN — BLOG TAB
+// ==========================
+
+async function renderBlogTab(){
+
+    tabContent.innerHTML = `
+        <button class="admin-add-btn" id="openAddPostBtn">
+            <i class="fa-solid fa-plus"></i> Add Post
+        </button>
+        <div id="postsList" class="admin-table"></div>
+    `;
+
+    document.getElementById("openAddPostBtn").addEventListener("click", () => openPostForm());
+
+    await loadPostsList();
+
+}
+
+async function loadPostsList(){
+
+    const listEl = document.getElementById("postsList");
+    listEl.innerHTML = `<p style="color:var(--secondary)">Loading...</p>`;
+
+    const snapshot = await getDocs(collection(db, "blog"));
+
+    if(snapshot.empty){
+        listEl.innerHTML = `<p style="color:var(--secondary)">No posts yet.</p>`;
+        return;
+    }
+
+    listEl.innerHTML = "";
+
+    // Sort newest first by timestamp
+    const posts = snapshot.docs
+        .map(d => ({ id: d.id, ...d.data() }))
+        .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+    posts.forEach(post => {
+
+        const row = document.createElement("div");
+        row.className = "admin-row";
+
+        row.innerHTML = `
+            <div class="admin-row-info">
+                <strong>${post.title}</strong>
+                <small>${post.category || ""} • ${post.readTime || "?"} min read</small>
+            </div>
+            <div class="admin-row-actions">
+                <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
+                <button class="delete-btn"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        `;
+
+        row.querySelector(".edit-btn").addEventListener("click", () => openPostForm(post.id, post));
+        row.querySelector(".delete-btn").addEventListener("click", () => deletePost(post.id));
+
+        listEl.appendChild(row);
+
+    });
+
+}
+
+async function deletePost(id){
+    if(!confirm("Delete this post permanently?")) return;
+    await deleteDoc(doc(db, "blog", id));
+    await loadPostsList();
+}
+
+function estimateReadTime(markdown){
+    const words = markdown.trim().split(/\s+/).length;
+    return Math.max(1, Math.round(words / 200));   // ~200 wpm average reading speed
+}
+
+function openPostForm(id = null, existing = null){
+
+    const isEdit = id !== null;
+
+    const modal = document.createElement("div");
+    modal.className = "admin-modal";
+
+    modal.innerHTML = `
+        <div class="admin-modal-box" style="width:640px">
+
+            <h3>${isEdit ? "Edit Post" : "Add Post"}</h3>
+
+            <div class="input-group">
+                <label>Title</label>
+                <input type="text" id="bTitle" value="${existing?.title || ""}">
+            </div>
+
+            <div class="input-group">
+                <label>Category</label>
+                <input type="text" id="bCategory" placeholder="e.g. Architecture, Debugging, Firebase" value="${existing?.category || ""}">
+            </div>
+
+            <div class="input-group">
+                <label>Excerpt (short summary shown on the blog list)</label>
+                <textarea id="bExcerpt" style="min-height:50px">${existing?.excerpt || ""}</textarea>
+            </div>
+
+            <div class="input-group">
+                <label>Cover Image URL (optional)</label>
+                <input type="text" id="bCover" value="${existing?.coverUrl || ""}">
+            </div>
+
+            <div class="input-group">
+                <label>LinkedIn Post URL (optional)</label>
+                <input type="text" id="bLinkedin" placeholder="Link to the related LinkedIn post" value="${existing?.linkedinUrl || ""}">
+            </div>
+
+            <div class="input-group">
+                <label>Content (Markdown supported — ## headings, **bold**, \`code\`, \`\`\`code blocks\`\`\`)</label>
+                <textarea id="bContent" style="min-height:220px;font-family:'JetBrains Mono',monospace">${existing?.content || ""}</textarea>
+            </div>
+
+            <div class="input-group">
+                <label>Featured Post (shows large at the top)</label>
+                <select id="bFeatured">
+                    <option value="false" ${!existing?.featured ? "selected" : ""}>No</option>
+                    <option value="true" ${existing?.featured ? "selected" : ""}>Yes</option>
+                </select>
+            </div>
+
+            <div class="admin-modal-actions">
+                <button id="bSaveBtn" type="button">${isEdit ? "Update" : "Publish"}</button>
+                <button id="bCancelBtn" type="button">Cancel</button>
+            </div>
+
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    document.getElementById("bCancelBtn").addEventListener("click", () => modal.remove());
+
+    document.getElementById("bSaveBtn").addEventListener("click", async () => {
+
+        const content = document.getElementById("bContent").value.trim();
+
+        const data = {
+            title: document.getElementById("bTitle").value.trim(),
+            category: document.getElementById("bCategory").value.trim(),
+            excerpt: document.getElementById("bExcerpt").value.trim(),
+            coverUrl: document.getElementById("bCover").value.trim(),
+            linkedinUrl: document.getElementById("bLinkedin").value.trim(),   // 👈 new
+            content: content,
+            readTime: estimateReadTime(content),
+            featured: document.getElementById("bFeatured").value === "true",
+            createdAt: existing?.createdAt || Date.now()
+        };
+
+        if(!data.title || !content){
+            alert("Title and content are required.");
+            return;
+        }
+
+        if(isEdit){
+            await updateDoc(doc(db, "blog", id), data);
+        }
+        else{
+            await addDoc(collection(db, "blog"), data);
+        }
+
+        modal.remove();
+        await loadPostsList();
 
     });
 

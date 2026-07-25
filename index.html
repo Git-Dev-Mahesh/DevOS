@@ -40,6 +40,9 @@
         <!-- ICONS -->
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+        <!-- Blog -->
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
     
        
 
@@ -81,13 +84,13 @@
                         </li>
 
                         <li>
-                            <a href="#about" data-route="hero">
+                            <a href="#" data-tab="about">
                                 <i class="fa-solid fa-user"></i> About
                             </a>
                         </li>
 
                         <li>
-                            <a href="#projects" data-route="hero">
+                            <a href="#projects" data-route="projects">
                                 <i class="fa-solid fa-folder"></i>
                                 <span>Projects</span>
                             </a>
@@ -96,13 +99,6 @@
                         <li>
                             <a href="#skills" data-route="skills">
                                 <i class="fa-solid fa-laptop-code"></i> <span>Skills</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#lab" data-route="lab">
-                                <i class="fa-solid fa-flask"></i>
-                                <span>Lab</span>
                             </a>
                         </li>
 
@@ -116,13 +112,6 @@
                             <a href="#blog" data-route="blog">
                                 <i class="fa-solid fa-pen"></i>
                                 <span>Blog</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#timeline" data-route="timeline">
-                                <i class="fa-solid fa-clock"></i>
-                                <span>Timeline</span>
                             </a>
                         </li>
 
@@ -650,9 +639,6 @@
 
                                     
                                         <p class="about-description">
-                                            I'm a passionate Software Engineer focused on building modern web applications, cloud solutions, and software that solves real-world problems.
-
-                                            I enjoy learning new technologies and turning ideas into polished digital products.
                                         </p>
 
                                         
@@ -798,126 +784,8 @@
                                             <span>2 hours ago</span>
 
                                         </div>
-
+                                        
                                 </div>
-
-                                <div class="card stats-card">
-
-                                    <div class="section-header">
-
-                                        <div class="section-title">
-
-                                            <i class="fa-solid fa-chart-column"></i>
-
-                                            <h3>Today's Stats</h3>
-                                            
-                                        </div>
-
-                                    </div>
-
-                                    <div class="stats-list">
-
-                                        <div class="stat-item">
-
-                                            <div class="stat-icon coding">
-
-                                                <i class="fa-solid fa-laptop-code"></i>
-                                                
-                                            </div>
-
-                                            <div class="stat-info">
-
-                                                <small>Coding Time</small>
-
-                                                <h4>5h 24m</h4>
-
-                                                <div class="mini-progress">
-
-                                                    <div class="mini-fill coding-fill"></div>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="stat-item">
-
-                                            <div class="stat-icon coffee">
-
-                                                <i class="fa-solid fa-mug-hot"></i>
-
-                                            </div>
-
-                                            <div class="stat-info">
-
-                                                <small>Coffee</small>
-
-                                                <h4>03 Cups</h4>
-
-                                                <div class="mini-progress">
-
-                                                    <div class="mini-fill coffee-fill"></div>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="stat-item">
-
-                                                <div class="stat-icon tasks">
-
-                                                    <i class="fa-solid fa-list-check"></i>
-                                                    
-                                                </div>
-
-                                                <div class="stat-info">
-
-                                                    <small>Taks Done</small>
-                                                    
-                                                    <h4>12</h4>
-
-                                                    <div class="mini-progress">
-
-                                                        <div class="mini-fill task-fill"></div>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="stat-item">
-
-                                                <div class="stat-icon learning">
-
-                                                    <i class="fa-solid fa-book-open"></i>
-
-                                                </div>
-
-                                                <div class="stat-info">
-
-                                                    <small>Learning</small>
-
-                                                    <h4>2.5 Hours</h4>
-
-                                                    <div class="mini-progress">
-
-                                                        <div class="mini-fill learning-fill">
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div> 
-                                    
-                                    </div>
 
                             </div> 
                         
@@ -1088,10 +956,65 @@
                     <div class="cert-grid" id="certGrid"></div>
 
                 </div>
+                
+                <div class="view" data-view="projects">
 
-                <div class="view" data-view="timeline" hidden></div>
-                <div class="view" data-view="blog" hidden></div>
-                <div class="view" data-view="lab" hidden></div>
+                    <div class="cert-header card">
+
+                        <div class="cert-title-block">
+                            <span class="skills-eyebrow">
+                                <i class="fa-solid fa-chevron-left"></i> PROJECTS
+                            </span>
+                            <h1>My <span>Projects</span></h1>
+                            <p>A collection of projects that showcase my skills and experience.</p>
+                        </div>
+
+                        <div class="skills-summary-cards" id="projSummaryCards"></div>
+
+                    </div>
+
+                    <div class="card proj-filter-bar">
+                        <div class="proj-filter-tabs" id="projFilterTabs">
+                            <button class="proj-filter-tab active" data-filter="All">All</button>
+                            <button class="proj-filter-tab" data-filter="Web Apps">Web Apps</button>
+                            <button class="proj-filter-tab" data-filter="Tools">Tools</button>
+                            <button class="proj-filter-tab" data-filter="Mobile">Mobile</button>
+                        </div>
+                        <input type="text" id="projSearch" placeholder="Search projects...">
+                    </div>
+
+                    <div class="proj-grid" id="projGrid"></div>
+
+                </div>
+
+                <div class="view" data-view="blog">
+
+                    <div class="cert-header card">
+                        <div class="cert-title-block">
+                            <span class="skills-eyebrow"><i class="fa-solid fa-chevron-left"></i> SYSTEM LOG</span>
+                            <h1>Featured <span>Log</span></h1>
+                            <p>Notes on what I'm building, breaking, and learning.</p>
+                        </div>
+                    </div>
+
+                    <div class="card blog-activity">
+                        <h4>ACTIVITY</h4>
+                        <div id="blogActivityGraph" class="activity-graph"></div>
+                    </div>
+
+                    <div id="blogHero"></div>
+
+                    <div class="blog-grid" id="blogGrid"></div>
+
+                    <div id="blogReaderOverlay" class="blog-reader-overlay" hidden>
+                        <div class="blog-reader">
+                            <button id="closeReaderBtn" class="reader-close"><i class="fa-solid fa-xmark"></i></button>
+                            <div id="blogReaderContent"></div>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div class="view" data-view="contact" hidden></div>
                
             </main>
@@ -1099,6 +1022,13 @@
         </div>
 
         <!-- JAVASCRIPT -->
+
+        <script type="module" src="js/about.js"></script>
+
+        <script type="module" src="js/blog.js"></script>
+
+        <script type="module" src="js/projects-page.js"></script>
+
         <script type="module" src="js/certificates.js"></script>
 
         <script src="js/router.js"></script>
