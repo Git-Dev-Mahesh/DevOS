@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOS | Admin Panel</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/admin.css">
+
+</head>
+<body>
+
+    <div class="admin-app" id="adminApp" hidden>
+
+        <aside class="admin-sidebar">
+
+            <div class="admin-logo">
+                <h1>DEV<span>OS</span></h1>
+                <small>Admin Panel</small>
+            </div>
+
+            <nav class="admin-nav">
+                <a href="#" data-tab="projects" class="active">
+                    <i class="fa-solid fa-folder"></i> Projects
+                </a>
+                <a href="#" data-tab="skills">
+                    <i class="fa-solid fa-laptop-code"></i> Skills
+                </a>
+                <a href="#" data-tab="certificates">
+                    <i class="fa-solid fa-award"></i> Certificates
+                </a>
+                <a href="#" data-tab="timeline">
+                    <i class="fa-solid fa-clock"></i> Timeline
+                </a>
+                <a href="#" data-tab="blog">
+                    <i class="fa-solid fa-pen"></i> Blog
+                </a>
+            </nav>
+
+            <button id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+
+        </aside>
+
+        <main class="admin-main">
+
+            <header class="admin-topbar">
+                <h2 id="adminTabTitle">Projects</h2>
+                <span id="adminUserEmail"></span>
+            </header>
+
+            <div class="admin-tab-content" id="adminTabContent">
+                <!-- tab content renders here -->
+            </div>
+
+        </main>
+
+    </div>
+
+    <div class="admin-loading" id="adminLoading">
+        <p>Verifying access...</p>
+    </div>
+
+    <script type="module" src="js/admin-auth-guard.js"></script>
+    <script type="module" src="js/admin.js"></script>
+
+</body>
+</html>

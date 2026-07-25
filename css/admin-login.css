@@ -1,0 +1,91 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body{
+    background: #050816;
+    color: white;
+    font-family: "JetBrains Mono", monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-card{
+    background: #0B1120;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 18px;
+    padding: 40px;
+    width: 360px;
+}
+
+.login-logo{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-logo h1{
+    font-size: 2rem;
+    letter-spacing: 4px;
+}
+
+.login-logo span{
+    color: #3B82F6;
+}
+
+.login-logo small{
+    color: #94A3B8;
+    display: block;
+    margin-top: 6px;
+}
+
+.input-group{
+    margin-bottom: 18px;
+}
+
+.input-group label{
+    display: block;
+    font-size: .75rem;
+    color: #94A3B8;
+    margin-bottom: 6px;
+}
+
+.input-group input{
+    width: 100%;
+    padding: 12px;
+    background: #1E293B;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 10px;
+    color: white;
+    font-family: inherit;
+    outline: none;
+}
+
+.input-group input:focus{
+    border-color: #3B82F6;
+}
+
+button{
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg,#3B82F6,#8B5CF6);
+    color: white;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+button:disabled{
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+#loginError{
+    color: #EF4444;
+    font-size: .8rem;
+    text-align: center;
+    margin-top: 12px;
+    min-height: 16px;
+}

@@ -1,0 +1,23 @@
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDadtmKdpNlcqKuHAgulc6zr6dKz1rcopI",
+    authDomain: "devos-portfolio-v1.firebaseapp.com",
+    projectId: "devos-portfolio-v1",
+    storageBucket: "devos-portfolio-v1.firebasestorage.app",
+    messagingSenderId: "328323171176",
+    appId: "1:328323171176:web:f008048111d5f9e28e8cdd",
+    measurementId: "G-R7HYZD0X8F"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>

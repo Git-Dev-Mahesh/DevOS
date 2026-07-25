@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOS | Admin Access</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/admin-login.css">
+
+</head>
+<body>
+
+    <div class="login-screen">
+
+        <div class="login-card">
+
+            <div class="login-logo">
+                <h1>DEV<span>OS</span></h1>
+                <small>Restricted Access</small>
+            </div>
+
+            <form id="loginForm">
+
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" required autocomplete="off">
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required autocomplete="off">
+                </div>
+
+                <button type="submit" id="loginBtn">Authenticate</button>
+
+                <p id="loginError"></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script type="module" src="js/admin-login.js"></script>
+
+</body>
+</html>

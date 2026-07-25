@@ -1501,3 +1501,122 @@ margin-top: 20px;
     color: var(--green);
     font-size: .75rem;
 }
+
+/* ==========================
+        CERTIFICATES PAGE
+========================== */
+
+.cert-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cert-title-block h1{
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 2.2rem;
+    margin: 8px 0;
+}
+
+.cert-title-block h1 span{
+    background: linear-gradient(90deg,#3B82F6,#8B5CF6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cert-title-block p{
+    color: var(--secondary);
+    font-size: .9rem;
+}
+
+.cert-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.cert-card{
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px;
+    padding: 20px;
+    transition: .25s;
+}
+
+.cert-card:hover{
+    border-color: rgba(59,130,246,.35);
+    transform: translateY(-4px);
+}
+
+.cert-card-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+}
+
+.cert-icon{
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(59,130,246,.12);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.cert-link-icon{
+    color: var(--secondary);
+    font-size: .85rem;
+}
+
+.cert-link-icon:hover{
+    color: var(--primary);
+}
+
+.cert-card h4{
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.cert-card small{
+    color: var(--secondary);
+    font-size: .8rem;
+}
+
+.cert-card-bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.cert-date{
+    color: var(--secondary);
+    font-size: .75rem;
+}
+
+.cert-view-btn{
+    background: rgba(59,130,246,.15);
+    color: var(--primary);
+    font-size: .75rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    text-decoration: none;
+}
+
+.cert-view-btn:hover{
+    background: rgba(59,130,246,.25);
+}
+
+.cert-view-btn.disabled{
+    background: rgba(255,255,255,.05);
+    color: var(--secondary);
+    cursor: not-allowed;
+}

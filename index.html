@@ -1069,8 +1069,24 @@
 
                 </div>
 
-                <div class="view" data-view="certificates" hidden>
-                    <!-- placeholder for now -->
+                <div class="view" data-view="certificates">
+
+                    <div class="cert-header card">
+
+                        <div class="cert-title-block">
+                            <span class="skills-eyebrow">
+                                <i class="fa-solid fa-chevron-left"></i> CERTIFICATES
+                            </span>
+                            <h1>My <span>Certificates</span></h1>
+                            <p>Professional certifications and achievements.</p>
+                        </div>
+
+                        <div class="skills-summary-cards" id="certSummaryCards"></div>
+
+                    </div>
+
+                    <div class="cert-grid" id="certGrid"></div>
+
                 </div>
 
                 <div class="view" data-view="timeline" hidden></div>
@@ -1083,10 +1099,16 @@
         </div>
 
         <!-- JAVASCRIPT -->
+        <script type="module" src="js/certificates.js"></script>
+
         <script src="js/router.js"></script>
-        <script src="js/skills.js"></script>
+
+        <script type="module" src="js/skills.js"></script>
+
         <script src="js/app.js"></script>
+
         <script src="js/commands.js"></script>
+        
         <script src="js/terminal.js"></script>
 
     </body>
