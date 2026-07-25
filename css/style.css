@@ -1427,7 +1427,7 @@ margin-top: 20px;
 
 .detail-stat-grid{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     margin-bottom: 20px;
 }
@@ -1479,4 +1479,25 @@ margin-top: 20px;
     display: block;
     margin-bottom: 8px;
     color: var(--secondary);
+}
+
+.recent-project-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    font-size: .85rem;
+}
+
+.recent-project-item small{
+    display: block;
+    color: var(--secondary);
+    font-size: .75rem;
+    margin-top: 2px;
+}
+
+.recent-project-status{
+    color: var(--green);
+    font-size: .75rem;
 }

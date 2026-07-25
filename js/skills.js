@@ -13,7 +13,6 @@ const skillsData = [
         rating: 5,
         projects: 12,
         years: "2+",
-        confidence: "High",
         description: "The standard markup language for building web pages.",
         related: ["CSS", "JavaScript"]
     },
@@ -26,7 +25,6 @@ const skillsData = [
         rating: 5,
         projects: 10,
         years: "2+",
-        confidence: "High",
         description: "Stylesheet language used for describing the presentation of web pages.",
         related: ["HTML", "Tailwind CSS"]
     },
@@ -39,7 +37,6 @@ const skillsData = [
         rating: 4,
         projects: 14,
         years: "2+",
-        confidence: "High",
         description: "A programming language that powers interactivity on the web.",
         related: ["React", "TypeScript"]
     },
@@ -52,7 +49,6 @@ const skillsData = [
         rating: 4,
         projects: 8,
         years: "2+",
-        confidence: "High",
         description: "A JavaScript library for building user interfaces, maintained by Meta.",
         related: ["JavaScript", "TypeScript", "Redux", "Next.js"]
     },
@@ -65,7 +61,6 @@ const skillsData = [
         rating: 4,
         projects: 9,
         years: "2+",
-        confidence: "High",
         description: "A JavaScript runtime built on Chrome's V8 engine for server-side development.",
         related: ["Express.js", "MongoDB"]
     },
@@ -78,7 +73,6 @@ const skillsData = [
         rating: 3,
         projects: 5,
         years: "1+",
-        confidence: "Medium",
         description: "A NoSQL document database designed for scalability and flexibility.",
         related: ["Node.js", "Express.js"]
     }
@@ -178,7 +172,7 @@ function renderStars(rating){
 
 function showSkillDetail(skillId){
 
-    const skill = skillsData.find(s => s.id === skillId);
+        const skill = skillsData.find(s => s.id === skillId);
     const detailEl = document.getElementById("skillDetail");
 
     if(!skill || !detailEl) return;
@@ -193,31 +187,37 @@ function showSkillDetail(skillId){
 
     detailEl.innerHTML = `
 
-        <div class="detail-header">
-            <div>${skill.icon} <h2 style="display:inline">${skill.name}</h2></div>
-            <span class="detail-badge">${skill.level}</span>
-        </div>
+    <div class="detail-header">
+        <div>${skill.icon} <h2 style="display:inline">${skill.name}</h2></div>
+        <span class="detail-badge">${skill.level}</span>
+    </div>
 
-        <p class="detail-desc">${skill.description}</p>
+    <p class="detail-desc">${skill.description}</p>
 
-        <div class="detail-label">EXPERIENCE LEVEL</div>
-        <div class="skill-stars" style="margin-bottom:6px">${renderStars(skill.rating)}</div>
-        <div class="detail-progress-bar">
-            <div class="detail-progress-fill" style="width:${skill.rating * 20}%"></div>
-        </div>
+    <div class="detail-label">EXPERIENCE LEVEL</div>
+    <div class="skill-stars" style="margin-bottom:6px">${renderStars(skill.rating)}</div>
+    <div class="detail-progress-bar">
+        <div class="detail-progress-fill" style="width:${skill.rating * 20}%"></div>
+    </div>
 
-        <div class="detail-stat-grid">
-            <div class="detail-stat-box"><small>Projects</small>${skill.projects}</div>
-            <div class="detail-stat-box"><small>Years Experience</small>${skill.years}</div>
-            <div class="detail-stat-box"><small>Confidence</small>${skill.confidence}</div>
-        </div>
+    <div class="detail-stat-grid">
+        <div class="detail-stat-box"><small>Projects</small>${skill.projects}</div>
+        <div class="detail-stat-box"><small>Years Experience</small>${skill.years}</div>
+        <div class="detail-stat-box"><small>Last Used</small><span id="lastUsed-${skill.id}">Loading...</span></div>
+    </div>
 
-        <div class="detail-label">RELATED SKILLS</div>
-        <div>
-            ${skill.related.map(r => `<span class="related-skill-tag">${r}</span>`).join("")}
-        </div>
+    <div class="detail-label">RELATED SKILLS</div>
+    <div style="margin-bottom:20px">
+        ${skill.related.map(r => `<span class="related-skill-tag">${r}</span>`).join("")}
+    </div>
 
-    `;
+    <div class="detail-label">RECENT PROJECTS</div>
+    <div id="recentProjectsList-${skill.id}">Loading...</div>
+
+`;
+
+loadLastUsed(skill);
+loadRecentProjects(skill);
 
 }
 
@@ -289,3 +289,101 @@ function initSkillsPage(){
 }
 
 initSkillsPage();
+
+// ==========================
+//  RECENT PROJECTS (real, scanned from Projects section)
+// ==========================
+
+function loadRecentProjects(skill){
+
+    const container = document.getElementById(`recentProjectsList-${skill.id}`);
+    if(!container) return;
+
+    const tagClass = skill.name.toLowerCase().replace(".", "").replace(" ", "");
+
+    const matchingCards = Array.from(document.querySelectorAll(".project-card"))
+        .filter(card => card.querySelector(`.tag.${tagClass}`));
+
+    if(matchingCards.length === 0){
+        container.innerHTML = `<p style="color:var(--secondary);font-size:.85rem">No tagged projects found for ${skill.name} yet.</p>`;
+        return;
+    }
+
+    container.innerHTML = matchingCards.map(card => {
+
+        const title = card.querySelector("h3")?.textContent.trim() || "Untitled";
+        const type = card.querySelector(".project-type")?.textContent.trim() || "";
+        const statusEl = card.querySelector(".project-status");
+        const status = statusEl ? statusEl.textContent.trim() : "In Progress";
+
+        return `
+            <div class="recent-project-item">
+                <div>
+                    <strong>${title}</strong>
+                    <small>${type}</small>
+                </div>
+                <span class="recent-project-status">${status}</span>
+            </div>
+        `;
+
+    }).join("");
+
+}
+
+// ==========================
+//  LAST USED (real, via GitHub API)
+// ==========================
+
+const GITHUB_USERNAME = "Git-Dev-Mahesh";
+
+const languageMap = {
+    "html": "HTML",
+    "css": "CSS",
+    "javascript": "JavaScript",
+    "react": "JavaScript",   // GitHub doesn't detect React as its own language
+    "nodejs": "JavaScript",
+    "mongodb": null          // GitHub can't detect a database as a "language"
+};
+
+async function loadLastUsed(skill){
+
+    const el = document.getElementById(`lastUsed-${skill.id}`);
+    if(!el) return;
+
+    const githubLang = languageMap[skill.id];
+
+    if(!githubLang){
+        el.textContent = "N/A";
+        return;
+    }
+
+    try{
+
+        const reposRes = await fetch(
+            `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`
+        );
+
+        if(!reposRes.ok) throw new Error("GitHub API error");
+
+        const repos = await reposRes.json();
+
+        const matchingRepo = repos.find(repo => repo.language === githubLang);
+
+        if(!matchingRepo){
+            el.textContent = "No data";
+            return;
+        }
+
+        const daysAgo = Math.floor(
+            (Date.now() - new Date(matchingRepo.pushed_at)) / (1000 * 60 * 60 * 24)
+        );
+
+        el.textContent = daysAgo === 0 ? "Today" : `${daysAgo} day${daysAgo === 1 ? "" : "s"} ago`;
+
+    }
+    catch(e){
+        console.warn("GitHub fetch failed:", e);
+        el.textContent = "Unavailable";
+    }
+
+}
