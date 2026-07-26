@@ -1006,21 +1006,31 @@
 
                     <div class="blog-grid" id="blogGrid"></div>
 
-                    <div id="blogReaderOverlay" class="blog-reader-overlay" hidden>
-                        <div class="blog-reader">
-                            <button id="closeReaderBtn" class="reader-close"><i class="fa-solid fa-xmark"></i></button>
-                            <div id="blogReaderContent"></div>
-                        </div>
-                    </div>
-
-                </div>
+                </div>   <!-- blog view now ends here, overlay removed from inside it -->
 
                 <div class="view" data-view="contact" hidden></div>
-               
+
             </main>
+
+        </div>   <!-- closes .app -->
+
+        <!-- Blog reader overlay — lives OUTSIDE .app so transform/scale never affects it -->
+        
+        <div id="blogReaderOverlay" class="blog-reader-overlay" hidden>
+            
+            <div class="blog-reader">
+                
+                <button id="closeReaderBtn" class="reader-close"><i class="fa-solid fa-xmark"></i></button>
+                <div id="blogReaderContent"></div>
+            
+            </div>
         
         </div>
 
+        <!-- JAVASCRIPT -->
+        <script type="module" src="js/about.js"></script>
+        
+        
         <!-- JAVASCRIPT -->
 
         <script type="module" src="js/about.js"></script>

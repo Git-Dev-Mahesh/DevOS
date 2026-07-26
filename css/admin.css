@@ -20,6 +20,10 @@ body{
     min-height: 100vh;
 }
 
+.admin-app[hidden]{
+    display: none !important;
+}
+
 .admin-sidebar{
     width: 240px;
     background: var(--card);

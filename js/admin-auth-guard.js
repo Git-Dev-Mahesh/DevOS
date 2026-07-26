@@ -17,6 +17,7 @@ onAuthStateChanged(auth, (user) => {
 
         adminLoading.hidden = true;
         adminApp.hidden = false;
+        adminApp.style.display = "";   // this line — clears the inline override too
         adminUserEmail.textContent = user.email;
 
     }
