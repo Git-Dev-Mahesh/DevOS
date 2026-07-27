@@ -125,30 +125,26 @@ setInterval(updateWeather, 10 * 60 * 1000);   // refresh every 10 minutes
 //  AVAILABILITY STATUS
 // ==========================
 
-// ==========================
-//  AVAILABILITY STATUS
-// ==========================
-
 // delete this whole block — replaced by the Firestore version in about.js
 
-function updateStatus(){
+// function updateStatus(){
 
-    const statusCard = document.querySelectorAll(".hero-aside .info-card")[2];
+//     const statusCard = document.querySelectorAll(".hero-aside .info-card")[2];
 
-    if(!statusCard) return;
+//     if(!statusCard) return;
 
-    const statusEl = statusCard.querySelector("h3");
-    const subtextEl = statusCard.querySelector("p");
+//     const statusEl = statusCard.querySelector("h3");
+//     const subtextEl = statusCard.querySelector("p");
 
-    if(isAvailableForWork){
-        statusEl.textContent = "Available";
-        statusEl.classList.add("online");
-        subtextEl.textContent = "For Opportunities";
-    }
-    else{
-        statusEl.textContent = "Busy";
-        statusEl.classList.remove("online");
-        subtextEl.textContent = "Not Available";
-    }
+//     if(isAvailableForWork){
+//         statusEl.textContent = "Available";
+//         statusEl.classList.add("online");
+//         subtextEl.textContent = "For Opportunities";
+//     }
+//     else{
+//         statusEl.textContent = "Busy";
+//         statusEl.classList.remove("online");
+//         subtextEl.textContent = "Not Available";
+//     }
 
-}
+// }
