@@ -1980,3 +1980,49 @@ margin-top: 20px;
 .linkedin-crosslink i:first-child{
     font-size: 1.1rem;
 }
+
+
+/* ==========================
+    HOME DASHBOARD WIDGETS
+========================== */
+
+.widgets-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.widget-list{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.widget-row{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    font-size: .85rem;
+}
+
+.widget-row i{
+    color: var(--primary);
+    width: 18px;
+}
+
+.widget-row span{
+    flex: 1;
+    font-weight: 500;
+}
+
+.widget-row small{
+    color: var(--secondary);
+    font-size: .75rem;
+}
+
+.widget-empty{
+    color: var(--secondary);
+    font-size: .85rem;
+}

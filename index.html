@@ -1,22 +1,117 @@
 <!DOCTYPE html>
 
+<!--
+===========================================================
+                        DevOS Portfolio
+-----------------------------------------------------------
+Author      : Mahesh Milan
+Version     : 2.x
+Project     : DevOS Portfolio
+
+Architecture
+
+Frontend    : HTML5
+Styling     : CSS3
+Logic        : JavaScript (ES Modules)
+Backend      : Firebase
+Database     : Firestore
+Hosting      : Netlify
+
+Purpose
+
+DevOS is a portfolio website designed to simulate
+a modern operating system.
+
+Every major section loads live data from Firestore,
+making the portfolio fully manageable through the
+Admin Dashboard without modifying the HTML.
+
+===========================================================
+-->
+
 <html lang="en">
     <head>
         
-        <!-- "Support almost every language and emoji."  -->
+        <!--
+        =======================================================
+        CHARACTER ENCODING
+
+        UTF-8 supports nearly every language, symbol,
+        and emoji.
+
+        Without UTF-8 some characters may display as
+        unreadable symbols.
+        =======================================================
+        -->
         <meta charset="UTF-8">
 
-        <!-- Make the website fit the screen. -->
+
+        <!--
+        =======================================================
+        RESPONSIVE VIEWPORT
+
+        Allows the layout to scale correctly on mobile,
+        tablet and desktop devices.
+
+        Without this browsers render the page using
+        desktop dimensions.
+        =======================================================
+        -->
         <meta name="viewport" 
         content="width=device-width, initial-scale=1.0">
+
         
-        <!-- Look at your browser tab. -->
+        <!--
+        =======================================================
+        PAGE TITLE
+
+        Appears in
+
+        • Browser tab
+        • Search engine results
+        • Browser history
+        • Bookmarks
+
+        =======================================================
+        -->
         <title>DevOS | Mahesh Milan</title>
 
-        <!-- connect our fonts -->
+
+        <!--
+        =======================================================
+        GOOGLE FONT OPTIMIZATION
+
+        Preconnect establishes an early connection
+        with Google's servers before downloading fonts.
+
+        Benefits
+
+        ✓ Faster font loading
+        ✓ Better Lighthouse score
+        ✓ Reduced latency
+        =======================================================
+        -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+        
+        <!--
+        =======================================================
+        TYPOGRAPHY
+
+        Space Grotesk
+            Primary headings
+
+        Inter
+            Main interface font
+
+        JetBrains Mono
+            Terminal and code blocks
+
+        Separating fonts by purpose improves visual
+        hierarchy throughout the application.
+        =======================================================
+        -->
         <!-- Space Grotesk font -->  
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 
@@ -26,40 +121,144 @@
         <!-- JetBrains Mono font -->
         <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 
-        <!-- connect our Stylesheet -->
+
+        <!--
+        =======================================================
+        STYLESHEET LOADING ORDER
+
+        CSS loads from top to bottom.
+
+        variables.css
+
+                ↓
+
+        style.css
+
+                ↓
+
+        animations.css
+
+                ↓
+
+        responsive.css
+
+                ↓
+
+        terminal.css
+
+        Why?
+
+        Every stylesheet depends on variables.css.
+
+        Responsive rules should always override
+        the base styles.
+
+        Terminal styling is isolated because it
+        only affects one module.
+        =======================================================
+        -->
         <link rel="stylesheet" href="css/variables.css">
-
         <link rel="stylesheet" href="css/style.css">
-
         <link rel="stylesheet" href="css/animations.css">
-
         <link rel="stylesheet" href="css/responsive.css">
-
         <link rel="stylesheet" href="css/terminal.css">
 
-        <!-- ICONS -->
+        
+        <!--
+        =======================================================
+        ICON LIBRARY
+
+        Font Awesome supplies every icon used
+        throughout DevOS.
+
+        Using one icon library keeps the interface
+        visually consistent.
+        =======================================================
+        -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
         
-        <!-- This is to solve the error of favicon.ico:1  Failed to load resource: the server responded with a status of 404 ()-->
+        <!--
+        Prevents favicon.ico 404 errors.
+        -->
         <link rel="icon" type="image/png" href="images/favicon.png"> 
 
-        <!-- Blog -->
-        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    
-       
+
+        <!--
+        =======================================================
+        MARKDOWN PARSER
+
+        Blog articles are stored as Markdown
+        inside Firestore.
+
+        marked.js converts Markdown into HTML
+        during rendering.
+
+        This allows writing articles without
+        manually creating HTML.
+        =======================================================
+        -->
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> 
 
     </head>
 
     <body>
 
+         <!--
+        =======================================================
+                        APPLICATION LAYOUT
+
+        DevOS follows a desktop application layout.
+
+                +-------------------------+
+                | Sidebar | Main Content  |
+                +-------------------------+
+
+        Sidebar remains constant.
+
+        Only the Main Content changes using
+        router.js.
+
+        This creates a Single Page Application
+        experience without page reloads.
+        =======================================================
+        -->
+
+
         <div class="app">
         
             
-            <!-- (SIDE BAR / LOGO / SOCIAL LINK) -->
+            <!--
+            ===========================================================
+                                    SIDEBAR
+
+            Acts as the primary navigation system.
+
+            Contains
+
+            ✓ Branding
+            ✓ Navigation
+            ✓ Social Links
+            ✓ Footer
+
+            The sidebar never reloads.
+
+            Only the content area changes,
+            creating a native desktop feeling.
+            ===========================================================
+            -->
 
             <aside>
 
-                <!-- LOGO -->
+                <!--
+                ===========================================================
+                APPLICATION BRANDING
+
+                Displays the DevOS logo.
+
+                Visible on every screen to reinforce
+                the application's identity.
+                ===========================================================
+                -->
 
                 <div class="logo">
 
@@ -74,9 +273,52 @@
                 </div>
              
 
-                <!-- SIDEBAR NAVIGATION -->
+                <!--
+                ===========================================================
+                SIDEBAR NAVIGATION
+
+                Unlike traditional websites,
+                DevOS does not navigate to
+                multiple HTML pages.
+
+                Instead,
+
+                router.js simply switches the
+                currently visible View.
+
+                Advantages
+
+                ✓ Instant navigation
+
+                ✓ Better user experience
+
+                ✓ No page reload
+
+                ✓ Preserves application state
+
+                ✓ Easier maintenance
+                ===========================================================
+                -->
 
                 <nav class="sidebar-nav">
+
+                    <!--
+                    data-route
+
+                    A custom HTML attribute.
+
+                    router.js reads this value
+                    to determine which View
+                    should become visible.
+
+                    Why use data-route?
+
+                    Instead of writing many
+                    if/else conditions based on URLs,
+
+                    every button describes
+                    its destination directly.
+                    -->
                     
                     <ul>
                         <li>
@@ -121,9 +363,9 @@
                     
                 </nav>
 
-                <!-- Social Links -->
-
                 
+
+                <!-- Social Links -->
                 <div class="social-links">
                     <a href="#" id="socialGithub" target="_blank"><i class="fa-brands fa-github"></i></a>
                     <a href="#" id="socialLinkedin" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
@@ -137,7 +379,7 @@
             </aside>
 
             <main>
-
+                
                 <!-- TOP BAR (THEME MODE / NOTIFICATION / LET'S TALK)-->
 
                 <header class = "topbar">
@@ -161,12 +403,31 @@
                 
                 </header>
 
-                <!-- existing sections get data-view -->
-
                 <div class="view" data-view="hero">
 
-                <!-- SECTION (HERO / CLOCK / WHEATHER / STATUS / VISITORS)-->
-                    
+                <!--
+                ===========================================================
+                HOME VIEW
+
+                Acts as the Dashboard.
+
+                Purpose
+
+                • Personal introduction
+
+                • Quick statistics
+
+                • Featured projects
+
+                • Live widgets
+
+                • Terminal
+
+                This page gives recruiters an
+                overview before exploring
+                individual modules.
+                ===========================================================
+                -->
                     <section id="hero">
 
                         <div class="hero-grid">
@@ -214,6 +475,34 @@
                                     </div>
 
                             </div>
+
+                            <!--
+===========================================================
+HOME DASHBOARD WIDGETS
+
+These widgets display previews.
+
+Only a limited number of records
+are loaded from Firestore.
+
+Examples
+
+Skills
+Latest Certificates
+Recent Blog Posts
+
+Benefits
+
+✓ Faster loading
+
+✓ Better performance
+
+✓ Cleaner interface
+
+Users can open the complete module
+using the "View All" button.
+===========================================================
+-->
 
                             <div class="hero-aside">
 
@@ -288,6 +577,7 @@
                         </div>
 
                     </section>
+
 
                     <!-- SECTION PROJECTS -->
 
@@ -594,6 +884,53 @@
 
                     </section>
 
+                    <section id="home-widgets">
+
+                        <div class="widgets-grid">
+
+                            <div class="widget-card card">
+                                <div class="section-header">
+                                    <div class="section-title">
+                                        <i class="fa-solid fa-laptop-code"></i>
+                                        <h3>Skills</h3>
+                                    </div>
+                                    <a href="#skills" data-route="skills" class="view-all">
+                                        View All <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                                <div id="homeSkillsList" class="widget-list"></div>
+                            </div>
+
+                            <div class="widget-card card">
+                                <div class="section-header">
+                                    <div class="section-title">
+                                        <i class="fa-solid fa-award"></i>
+                                        <h3>Certificates</h3>
+                                    </div>
+                                    <a href="#certificates" data-route="certificates" class="view-all">
+                                        View All <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                                <div id="homeCertsList" class="widget-list"></div>
+                            </div>
+
+                            <div class="widget-card card">
+                                <div class="section-header">
+                                    <div class="section-title">
+                                        <i class="fa-solid fa-pen"></i>
+                                        <h3>Latest Posts</h3>
+                                    </div>
+                                    <a href="#blog" data-route="blog" class="view-all">
+                                        View All <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                                <div id="homeBlogList" class="widget-list"></div>
+                            </div>
+
+                        </div>
+
+                    </section>
+
                     <!-- SECTION (ABOUT / GITHUB / TODAY STATS) -->
 
                     <section id="about">
@@ -839,7 +1176,36 @@
 
                 </div>
 
+
+
                 <div class="view" data-view="skills">
+                    <!--
+===========================================================
+SKILLS MATRIX
+
+Interactive explorer for all
+technologies.
+
+Components
+
+• Search
+
+• Categories
+
+• Detail Panel
+
+• Statistics
+
+• Technology Summary
+
+The layout mimics a desktop
+file explorer.
+
+Selecting a skill updates only
+the detail panel instead of
+reloading the page.
+===========================================================
+-->
 
                     <div class="skills-header card">
 
@@ -948,6 +1314,33 @@
                 </div>
                 
                 <div class="view" data-view="projects">
+                    <!--
+===========================================================
+PROJECTS MODULE
+
+Displays projects stored
+inside Firestore.
+
+Future Architecture
+
+GitHub
+
+↓
+
+GitHub API
+
+↓
+
+Firestore
+
+↓
+
+Portfolio
+
+Meaning every new GitHub repository
+can automatically appear here.
+===========================================================
+-->
 
                     <div class="cert-header card">
 
@@ -978,6 +1371,33 @@
                 </div>
 
                 <div class="view" data-view="blog">
+                    <!--
+===========================================================
+BLOG MODULE
+
+Workflow
+
+Markdown
+
+↓
+
+Firestore
+
+↓
+
+marked.js
+
+↓
+
+HTML
+
+Markdown is easier to write,
+while HTML is easier to render.
+
+This keeps articles clean
+and developer-friendly.
+===========================================================
+-->
 
                     <div class="cert-header card">
                         <div class="cert-title-block">
@@ -999,6 +1419,23 @@
                 </div>   <!-- blog view now ends here, overlay removed from inside it -->
                 
                 <div class="view" data-view="about">
+                    <!--
+===========================================================
+ABOUT MODULE
+
+Displays complete profile information.
+
+Unlike the Home page,
+every field is loaded directly
+from Firestore.
+
+Nothing is hardcoded.
+
+Updating the Admin Dashboard
+automatically updates
+this page.
+===========================================================
+-->
 
                     <div class="cert-header card">
                         <div class="cert-title-block">
@@ -1059,10 +1496,32 @@
             </main>
 
         </div>   <!-- closes .app -->
-
-        <!-- Blog reader overlay — lives OUTSIDE .app so transform/scale never affects it -->
         
         <div id="blogReaderOverlay" class="blog-reader-overlay" hidden>
+            <!--
+===========================================================
+BLOG READER OVERLAY
+
+Placed outside ".app"
+
+Reason
+
+The main application uses CSS
+transforms and transitions.
+
+Keeping the overlay outside
+prevents
+
+• clipping
+
+• scaling
+
+• z-index conflicts
+
+This is a common production
+technique for modals.
+===========================================================
+-->
             
             <div class="blog-reader">
                 
@@ -1073,30 +1532,72 @@
         
         </div>
 
-        <!-- JAVASCRIPT -->
-        <script type="module" src="js/about.js"></script>
         
-        
-        <!-- JAVASCRIPT -->
+        <!--
+===========================================================
+APPLICATION MODULES
 
-        <script type="module" src="js/about.js"></script>
+Each feature is separated into
+its own JavaScript module.
 
-        <script type="module" src="js/blog.js"></script>
+Benefits
 
-        <script type="module" src="js/projects-page.js"></script>
+✓ Modular Architecture
 
-        <script type="module" src="js/certificates.js"></script>
+✓ Easier Debugging
 
-        <script src="js/router.js"></script>
+✓ Better Scalability
 
-        <script type="module" src="js/skills.js"></script>
+✓ Independent Development
 
-        <script src="js/app.js"></script>
+✓ Faster Maintenance
 
-        <script src="js/commands.js"></script>
-        
-        <script src="js/terminal.js"></script>
+Loading Order
 
-    </body>
+1. Feature Modules
+
+2. Router
+
+3. Core Application
+
+4. Terminal
+
+This keeps each feature isolated,
+making the codebase easier to
+extend in the future.
+===========================================================
+-->
+
+                <!-- Dashboard Widgets -->
+                <script type="module" src="js/home-widgets.js"></script>
+
+                <!-- About Module -->
+                <script type="module" src="js/about.js"></script>
+
+                <!-- Blog Module -->
+                <script type="module" src="js/blog.js"></script>
+
+                <!-- Projects Module -->
+                <script type="module" src="js/projects-page.js"></script>
+
+                <!-- Certificates Module -->
+                <script type="module" src="js/certificates.js"></script>
+
+                <!-- Single Page Router -->
+                <script src="js/router.js"></script>
+
+                <!-- Skills Matrix -->
+                <script type="module" src="js/skills.js"></script>
+
+                <!-- Global Application Logic -->
+                <script src="js/app.js"></script>
+
+                <!-- Terminal Commands -->
+                <script src="js/commands.js"></script>
+
+                <!-- Terminal Engine -->
+                <script src="js/terminal.js"></script>
+
+                    </body>
 
 </html>
