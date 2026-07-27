@@ -86,7 +86,7 @@
                         </li>
 
                         <li>
-                            <a href="#" data-tab="about">
+                            <a href="#about" data-route="about">
                                 <i class="fa-solid fa-user"></i> About
                             </a>
                         </li>
@@ -117,13 +117,6 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a href="#contact" data-route="hero">
-                                <i class="fa-solid fa-envelope"></i>
-                                <span>Contact</span>
-                            </a>
-                        </li>
-
                     </ul>
                     
                 </nav>
@@ -132,14 +125,9 @@
 
                 
                 <div class="social-links">
-
-                    <a href="#"><i class="fa-brands fa-github"></i></a>
-
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-
-                    <a href="mailto:your@email.com"><i class="fa-solid fa-envelope"></i></a>
-
-
+                    <a href="#" id="socialGithub" target="_blank"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" id="socialLinkedin" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" id="socialEmail"><i class="fa-solid fa-envelope"></i></a>
                 </div>
 
                 <div class="sidebar-footer">
@@ -1009,8 +997,64 @@
                     <div class="blog-grid" id="blogGrid"></div>
 
                 </div>   <!-- blog view now ends here, overlay removed from inside it -->
+                
+                <div class="view" data-view="about">
 
-                <div class="view" data-view="contact" hidden></div>
+                    <div class="cert-header card">
+                        <div class="cert-title-block">
+                            <span class="skills-eyebrow"><i class="fa-solid fa-chevron-left"></i> ABOUT ME</span>
+                            <h1>About <span>Me</span></h1>
+                            <p>Get to know more about me, my journey and what drives me.</p>
+                        </div>
+
+                        <div class="skills-summary-cards" id="aboutStatsCards"></div>
+                    </div>
+
+                    <div class="about-grid">
+
+                        <div class="card about-profile-card">
+                            <h4>PROFILE</h4>
+                            <img src="images/profile.png" alt="profile picture" class="profile-image" id="aboutProfileImg">
+
+                            <span class="about-availability-badge online" id="aboutAvailBadge">Open to Work</span>
+
+                            <h3 id="aboutNameDisplay"></h3>
+                            <p class="about-title-display" id="aboutTitleDisplay"></p>
+                            <p class="about-location-display"><i class="fa-solid fa-location-dot"></i> <span id="aboutLocationDisplay"></span></p>
+
+                            <div class="about-contact-list" id="aboutContactList"></div>
+                        </div>
+
+                        <div class="card about-bio-card">
+                            <h4>ABOUT</h4>
+                            <div id="aboutBioText"></div>
+                            <div class="about-tags" id="aboutTagsDisplay"></div>
+                        </div>
+
+                        <div class="about-side-col">
+
+                            <div class="card about-info-card">
+                                <h4>PERSONAL INFO</h4>
+                                <div id="aboutPersonalInfo"></div>
+                            </div>
+
+                            <div class="card about-resume-card">
+                                <h4>DOWNLOAD RESUME</h4>
+                                <a href="#" id="aboutResumeBtn" class="primary-btn" style="display:flex;justify-content:center;width:100%" target="_blank">
+                                    <i class="fa-solid fa-download"></i> Download CV
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card about-focus-card">
+                        <h4>MY FOCUS</h4>
+                        <div class="about-focus-grid" id="aboutFocusGrid"></div>
+                    </div>
+
+                </div>
 
             </main>
 

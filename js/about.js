@@ -5,108 +5,149 @@
 import { db } from "./firebase-config.js";
 import { collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
-const GITHUB_USERNAME = "Git-Dev-Mahesh";
+const focusIcons = {
+    "Full Stack Development": "fa-solid fa-layer-group",
+    "Cloud Computing": "fa-solid fa-cloud",
+    "System Design": "fa-solid fa-diagram-project",
+    "AI & Machine Learning": "fa-solid fa-microchip"
+};
 
-async function loadAboutProfile(){
+async function loadAbout(){
 
     const snap = await getDoc(doc(db, "about", "profile"));
     if(!snap.exists()) return;
 
     const data = snap.data();
 
-    const descEl = document.querySelector(".about-description");
-    const locEl = document.querySelector(".about-info .info-item:nth-child(1) p");
-    const expEl = document.querySelector(".about-info .info-item:nth-child(2) p");
-    const emailEl = document.querySelector(".about-info .info-item:nth-child(3) p");
-    const imgEl = document.querySelector(".profile-image");
+    document.getElementById("aboutNameDisplay").textContent = data.name || "";
+    document.getElementById("aboutTitleDisplay").textContent = data.title || "";
+    document.getElementById("aboutLocationDisplay").textContent = data.location || "";
 
-    if(descEl) descEl.textContent = data.description || "";
-    if(locEl) locEl.textContent = data.location || "";
-    if(expEl) expEl.textContent = data.experience || "";
-    if(emailEl) emailEl.textContent = data.email || "";
-    if(imgEl && data.imageUrl) imgEl.src = data.imageUrl;
+    if(data.imageUrl){
+        document.getElementById("aboutProfileImg").src = data.imageUrl;
+    }
 
-    updateAvailabilityUI(data.available !== false);
+    const badge = document.getElementById("aboutAvailBadge");
+    const isAvailable = data.available !== false;
+    badge.textContent = isAvailable ? "Open to Work" : "Not Available";
+    badge.classList.toggle("online", isAvailable);
+
+    // Bio — split into paragraphs on blank lines
+    const bioEl = document.getElementById("aboutBioText");
+    const paragraphs = (data.description || "").split(/\n\s*\n/).filter(Boolean);
+    bioEl.innerHTML = paragraphs.map(p => `<p>${p.trim()}</p>`).join("");
+
+    // Tags
+    document.getElementById("aboutTagsDisplay").innerHTML =
+        (data.tags || []).map(t => `<span class="admin-tag">${t}</span>`).join("");
+
+    // Contact list
+    const contactEl = document.getElementById("aboutContactList");
+    let contactHTML = "";
+    if(data.email) contactHTML += `<div><i class="fa-solid fa-envelope"></i> ${data.email}</div>`;
+    if(data.phone) contactHTML += `<div><i class="fa-solid fa-phone"></i> ${data.phone}</div>`;
+    if(data.linkedinUrl) contactHTML += `<div><i class="fa-brands fa-linkedin"></i> <a href="${data.linkedinUrl}" target="_blank">${data.linkedinUrl.replace(/^https?:\/\//,"")}</a></div>`;
+    contactEl.innerHTML = contactHTML;
+
+    // Personal Info
+    const infoEl = document.getElementById("aboutPersonalInfo");
+    let infoHTML = "";
+    if(data.birthday) infoHTML += `<div class="info-row"><i class="fa-regular fa-calendar"></i><span>Birthday</span><strong>${data.birthday}</strong></div>`;
+    if(data.nationality) infoHTML += `<div class="info-row"><i class="fa-solid fa-flag"></i><span>Nationality</span><strong>${data.nationality}</strong></div>`;
+    if(data.language) infoHTML += `<div class="info-row"><i class="fa-solid fa-language"></i><span>Language</span><strong>${data.language}</strong></div>`;
+    infoHTML += `<div class="info-row"><i class="fa-solid fa-briefcase"></i><span>Freelance</span><strong>${isAvailable ? "Available" : "Not Available"}</strong></div>`;
+    infoEl.innerHTML = infoHTML;
+
+    // Sidebar social links — real data, no hardcoding
+    const githubLink = document.getElementById("socialGithub");
+    const linkedinLink = document.getElementById("socialLinkedin");
+    const emailLink = document.getElementById("socialEmail");
+
+    if(githubLink){
+        githubLink.href = `https://github.com/Git-Dev-Mahesh`;
+    }
+
+    
+    let linkedinUrl = data.linkedinUrl.trim();
+
+    if (!linkedinUrl.startsWith("http://") && !linkedinUrl.startsWith("https://")) {
+        linkedinUrl = "https://" + linkedinUrl;
+    }
+
+    linkedinLink.href = linkedinUrl;
+    linkedinLink.target = "_blank";
+    linkedinLink.rel = "noopener noreferrer";
+
+    if (emailLink) {
+
+    if (data.email) {
+
+        emailLink.href =
+            `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(data.email)}`;
+
+        emailLink.target = "_blank";
+        emailLink.rel = "noopener noreferrer";
+
+    } else {
+
+        emailLink.style.opacity = "0.4";
+        emailLink.style.pointerEvents = "none";
+
+    }
 
 }
 
-function updateAvailabilityUI(isAvailable){
-
-    const statusCard = document.querySelectorAll(".hero-aside .info-card")[2];
-    if(statusCard){
-        const statusEl = statusCard.querySelector("h3");
-        const subtextEl = statusCard.querySelector("p");
-
-        if(statusEl){
-            statusEl.textContent = isAvailable ? "Available" : "Busy";
-            statusEl.classList.toggle("online", isAvailable);
-        }
-        if(subtextEl){
-            subtextEl.textContent = isAvailable ? "For Opportunities" : "Not Available";
-        }
+    // Resume button
+    const resumeBtn = document.getElementById("aboutResumeBtn");
+    if(data.resumeUrl){
+        resumeBtn.href = data.resumeUrl;
+    }
+    else{
+        resumeBtn.style.opacity = "0.5";
+        resumeBtn.style.pointerEvents = "none";
+        resumeBtn.textContent = "No resume uploaded yet";
     }
 
-    const aboutAvailEl = document.querySelector(".about-info .info-item:nth-child(4) p");
-    if(aboutAvailEl){
-        aboutAvailEl.textContent = isAvailable ? "Open to work" : "Not available";
-        aboutAvailEl.classList.toggle("online", isAvailable);
-    }
+    // Focus areas
+    document.getElementById("aboutFocusGrid").innerHTML = (data.focusAreas || []).map(f => `
+        <div class="focus-item">
+            <i class="${focusIcons[f] || "fa-solid fa-star"}"></i>
+            <span>${f}</span>
+        </div>
+    `).join("");
 
 }
 
 async function loadAboutStats(){
 
-    const [projectsSnap, certsSnap, skillsSnap] = await Promise.all([
+    const [projectsSnap, certsSnap] = await Promise.all([
         getDocs(collection(db, "projects")),
-        getDocs(collection(db, "certificates")),
-        getDocs(collection(db, "skills"))
+        getDocs(collection(db, "certificates"))
     ]);
 
-    const statBoxes = document.querySelectorAll(".about-stats .stat-box h3");
+    const aboutSnap = await getDoc(doc(db, "about", "profile"));
+    const experience = aboutSnap.exists() ? (aboutSnap.data().experience || "—") : "—";
 
-    if(statBoxes[0]) statBoxes[0].textContent = `${projectsSnap.size}+`;
-    if(statBoxes[1]) statBoxes[1].textContent = certsSnap.size;
-    if(statBoxes[2]) statBoxes[2].textContent = `${skillsSnap.size}+`;
-
-}
-
-async function loadGithubOverview(){
-
-    const repoCountEl = document.querySelector(".github-grid div:nth-child(1) h2");
-    const commitCountEl = document.querySelector(".github-grid div:nth-child(2) h2");
-    const starCountEl = document.querySelector(".github-grid div:nth-child(3) h2");
-    const footerLatestEl = document.querySelector(".github-footer span:nth-child(1)");
-    const footerTimeEl = document.querySelector(".github-footer span:nth-child(2)");
-
-    try{
-
-        const userRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
-        const userData = await userRes.json();
-
-        const reposRes = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`);
-        const repos = await reposRes.json();
-
-        const totalStars = repos.reduce((sum, r) => sum + r.stargazers_count, 0);
-
-        if(repoCountEl) repoCountEl.textContent = userData.public_repos ?? "—";
-        if(starCountEl) starCountEl.textContent = totalStars;
-        if(commitCountEl) commitCountEl.textContent = repos.length;
-
-        if(repos.length > 0){
-            const latest = repos[0];
-            const daysAgo = Math.floor((Date.now() - new Date(latest.pushed_at)) / (1000*60*60*24));
-
-            if(footerLatestEl) footerLatestEl.textContent = `Latest Commit: ${latest.name}`;
-            if(footerTimeEl) footerTimeEl.textContent = daysAgo === 0 ? "Today" : `${daysAgo} day${daysAgo === 1 ? "" : "s"} ago`;
-        }
-
-    }
-    catch(e){
-        console.warn("GitHub overview fetch failed:", e);
-    }
+    document.getElementById("aboutStatsCards").innerHTML = `
+        <div class="summary-mini-card">
+            <i class="fa-solid fa-chart-line"></i>
+            <div><h3>${experience}</h3><small>Years Experience</small></div>
+        </div>
+        <div class="summary-mini-card">
+            <i class="fa-solid fa-check"></i>
+            <div><h3>${projectsSnap.size}+</h3><small>Projects Completed</small></div>
+        </div>
+        <div class="summary-mini-card">
+            <i class="fa-solid fa-certificate"></i>
+            <div><h3>${certsSnap.size}</h3><small>Certificates</small></div>
+        </div>
+        <div class="summary-mini-card">
+            <i class="fa-solid fa-mug-hot"></i>
+            <div><h3>∞</h3><small>Cups of Coffee</small></div>
+        </div>
+    `;
 
 }
 
-loadAboutProfile();
+loadAbout();
 loadAboutStats();
-loadGithubOverview();

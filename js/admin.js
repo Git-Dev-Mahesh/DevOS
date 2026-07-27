@@ -18,7 +18,17 @@ async function renderAboutTab(){
         <div class="admin-modal-box" style="width:600px;margin:0">
 
             <div class="input-group">
-                <label>Description</label>
+                <label>Full Name</label>
+                <input type="text" id="aboutName" value="${existing.name || ""}">
+            </div>
+
+            <div class="input-group">
+                <label>Title (e.g. Software Engineer)</label>
+                <input type="text" id="aboutTitle" value="${existing.title || ""}">
+            </div>
+
+            <div class="input-group">
+                <label>Description (use a blank line between paragraphs)</label>
                 <textarea id="aboutDesc" style="min-height:100px">${existing.description || ""}</textarea>
             </div>
 
@@ -38,11 +48,51 @@ async function renderAboutTab(){
             </div>
 
             <div class="input-group">
+                <label>Phone (optional)</label>
+                <input type="text" id="aboutPhone" value="${existing.phone || ""}">
+            </div>
+
+            <div class="input-group">
+                <label>LinkedIn URL (optional)</label>
+                <input type="text" id="aboutLinkedin" value="${existing.linkedinUrl || ""}">
+            </div>
+
+            <div class="input-group">
+                <label>Birthday (optional)</label>
+                <input type="text" id="aboutBirthday" placeholder="e.g. July 15, 2000" value="${existing.birthday || ""}">
+            </div>
+
+            <div class="input-group">
+                <label>Nationality (optional)</label>
+                <input type="text" id="aboutNationality" value="${existing.nationality || ""}">
+            </div>
+
+            <div class="input-group">
+                <label>Languages (optional)</label>
+                <input type="text" id="aboutLanguage" placeholder="e.g. English, Sinhala" value="${existing.language || ""}">
+            </div>
+
+            <div class="input-group">
                 <label>Available for Work</label>
                 <select id="aboutAvailable">
                     <option value="true" ${existing.available !== false ? "selected" : ""}>Yes — Available</option>
                     <option value="false" ${existing.available === false ? "selected" : ""}>No — Not Available</option>
                 </select>
+            </div>
+
+            <div class="input-group">
+                <label>Tags (comma separated — e.g. Problem Solver, Quick Learner)</label>
+                <input type="text" id="aboutTags" value="${(existing.tags || []).join(", ")}">
+            </div>
+
+            <div class="input-group">
+                <label>Focus Areas (comma separated — e.g. Full Stack Development, Cloud Computing)</label>
+                <input type="text" id="aboutFocus" value="${(existing.focusAreas || []).join(", ")}">
+            </div>
+
+            <div class="input-group">
+                <label>Resume/CV URL</label>
+                <input type="text" id="aboutResume" value="${existing.resumeUrl || ""}">
             </div>
 
             <div class="input-group">
@@ -59,20 +109,29 @@ async function renderAboutTab(){
 
     document.getElementById("aboutSaveBtn").addEventListener("click", async () => {
 
-    const data = {
-        description: document.getElementById("aboutDesc").value.trim(),
-        location: document.getElementById("aboutLocation").value.trim(),
-        experience: document.getElementById("aboutExperience").value.trim(),
-        email: document.getElementById("aboutEmail").value.trim(),
-        imageUrl: document.getElementById("aboutImage").value.trim(),
-        available: document.getElementById("aboutAvailable").value === "true"   // 👈 add this
-    };
+        const data = {
+            name: document.getElementById("aboutName").value.trim(),
+            title: document.getElementById("aboutTitle").value.trim(),
+            description: document.getElementById("aboutDesc").value.trim(),
+            location: document.getElementById("aboutLocation").value.trim(),
+            experience: document.getElementById("aboutExperience").value.trim(),
+            email: document.getElementById("aboutEmail").value.trim(),
+            phone: document.getElementById("aboutPhone").value.trim(),
+            linkedinUrl: document.getElementById("aboutLinkedin").value.trim(),
+            birthday: document.getElementById("aboutBirthday").value.trim(),
+            nationality: document.getElementById("aboutNationality").value.trim(),
+            language: document.getElementById("aboutLanguage").value.trim(),
+            available: document.getElementById("aboutAvailable").value === "true",
+            tags: document.getElementById("aboutTags").value.split(",").map(t => t.trim()).filter(Boolean),
+            focusAreas: document.getElementById("aboutFocus").value.split(",").map(t => t.trim()).filter(Boolean),
+            resumeUrl: document.getElementById("aboutResume").value.trim(),
+            imageUrl: document.getElementById("aboutImage").value.trim()
+        };
 
-    await setDoc(doc(db, "about", "profile"), data);
+        await setDoc(doc(db, "about", "profile"), data);
+        document.getElementById("aboutSaveStatus").textContent = "✔ Saved";
 
-    document.getElementById("aboutSaveStatus").textContent = "✔ Saved";
-
-});
+    });
 
 }
 
