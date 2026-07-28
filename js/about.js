@@ -116,20 +116,6 @@ async function loadAbout(){
         </div>
     `).join("");
 
-    
-    // Hero section's Download Resume button — same source as the About page
-    const heroResumeBtn = document.getElementById("heroResumeBtn");
-    if(heroResumeBtn){
-        if(data.resumeUrl){
-            heroResumeBtn.href = data.resumeUrl;
-        }
-        else{
-            heroResumeBtn.style.opacity = "0.5";
-            heroResumeBtn.style.pointerEvents = "none";
-            heroResumeBtn.textContent = "No Resume Yet";
-        }
-    }
-
 }
 
 async function loadAboutStats(){
